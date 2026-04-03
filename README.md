@@ -73,6 +73,7 @@ Dataset notes:
 - Cross-lingual transfer accuracy
 - Low-resource language performance
 - Per-domain classification analysis
+- Statistical significance testing across all language groups
 
 ## Tech Stack
 Python, LDA (scikit-learn), GPT-4, mBERT, Mistral 7B,
@@ -116,3 +117,4 @@ development
   Bidirectional Transformers
 - Jiang et al. (2023) — Mistral 7B
 - Blei et al. (2003) — Latent Dirichlet Allocation
+- OpenAI (2023) — GPT-4 Technical Report
