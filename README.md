@@ -60,7 +60,7 @@ Dataset notes:
 - Statistical significance testing across all language groups
 
 ## Tech Stack
-Python, LDA (scikit-learn), GPT-4, mBERT, Mistral 7B, HuggingFace Transformers, NLTK, pandas, numpY, matplotlib, seaborn
+Python, LDA (scikit-learn), GPT-4, mBERT, Mistral 7B, HuggingFace Transformers, NLTK, pandas, numpy, matplotlib, seaborn
 
 ## Research Timeline
 - February 2026: Research conception and literature review
