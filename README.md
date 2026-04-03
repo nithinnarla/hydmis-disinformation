@@ -6,8 +6,7 @@ HyDMIS is a three-stage hybrid NLP pipeline for multilingual disinformation dete
 Evaluated across 7 real-world datasets totaling 387,000+ samples spanning health, political, and social domains across 10+ languages.
 
 ## Research Question
-How can hybrid NLP pipelines combining unsupervised topic modeling with cross-lingual transformer classification 
-improve disinformation detection accuracy across low-resource languages and underrepresented communities?
+How can hybrid NLP pipelines combining unsupervised topic modeling with cross-lingual transformer classification improve disinformation detection accuracy across low-resource languages and underrepresented communities?
 
 ## Pipeline Architecture
 
@@ -46,18 +45,11 @@ improve disinformation detection accuracy across low-resource languages and unde
 
 Dataset notes:
 - LIAR and FakeNewsNet used as established English baselines
-- TruthSeeker (2023) is the largest labeled social media 
-  fake news dataset in existence (Dadkhah et al., IEEE 2023)
-- MultiClaim and Covid-vaccine-misinfo-MIC address 
-  multilingual and underrepresented community coverage
-- NewsPolyML provides IFCN-certified European multilingual 
-  fact-checked claims
-- DeFaktS (2024) provides fine-grained Twitter/X labels 
-  across elections, climate, and health topics
-- Note: Disinformation datasets are inherently smaller 
-  than general tabular ML datasets due to expert 
-  fact-checking requirements. 387K+ represents one of 
-  the largest multi-dataset collections in this field.
+- TruthSeeker (2023) is the largest labeled social media fake news dataset in existence (Dadkhah et al., IEEE 2023)
+- MultiClaim and Covid-vaccine-misinfo-MIC address multilingual and underrepresented community coverage
+- NewsPolyML provides IFCN-certified European multilingual fact-checked claims
+- DeFaktS (2024) provides fine-grained Twitter/X labels across elections, climate, and health topics
+- Note: Disinformation datasets are inherently smaller than general tabular ML datasets due to expert fact-checking requirements. 387K+       represents one of the largest multi-dataset collections in this field.
 
 ## Evaluation Metrics
 - F1 score (macro + weighted)
@@ -68,9 +60,7 @@ Dataset notes:
 - Statistical significance testing across all language groups
 
 ## Tech Stack
-Python, LDA (scikit-learn), GPT-4, mBERT, Mistral 7B,
-HuggingFace Transformers, NLTK, pandas, numpy,
-matplotlib, seaborn
+Python, LDA (scikit-learn), GPT-4, mBERT, Mistral 7B, HuggingFace Transformers, NLTK, pandas, numpy matplotlib, seaborn
 
 ## Research Timeline
 - February 2026: Research conception and literature review
@@ -78,8 +68,7 @@ matplotlib, seaborn
 - April 2026: Stage 1 LDA implementation
 - May 2026: Stage 2 GPT-4 semantic verification
 - June 2026: Stage 3 mBERT + Mistral classification
-- August 2026: Cross-lingual evaluation and ablation 
-  studies
+- August 2026: Cross-lingual evaluation and ablation studies
 - November 2026: Target submission to EMNLP
 
 ## Status
@@ -87,9 +76,7 @@ matplotlib, seaborn
 Target venue: EMNLP 2026
 
 ## Paper
-"HyDMIS: Hybrid Disinformation Mitigation Using Topic 
-Modeling and Cross-Lingual Classification" — Under 
-development
+"HyDMIS: Hybrid Disinformation Mitigation Using Topic Modeling and Cross-Lingual Classification" — Under development
 
 ## References
 - Wang et al. (2017) — LIAR: A Benchmark Dataset for 
