@@ -6,7 +6,9 @@ HyDMIS is a three-stage hybrid NLP pipeline for multilingual disinformation dete
 Evaluated across 7 real-world datasets totaling 387,000+ samples spanning health, political, and social domains across 10+ languages.
 
 ## Research Question
-How can hybrid NLP pipelines combining unsupervised topic modeling with cross-lingual transformer classification improve disinformation detection accuracy across low-resource languages and underrepresented communities?
+**Broad motivation:** How can hybrid NLP pipelines improve disinformation detection across languages?
+
+**This paper specifically asks:** How can multilingual disinformation detection systems protect underrepresented communities at platform scale, specifically in low-resource languages where existing systems fail?
 
 ## Pipeline Architecture
 
