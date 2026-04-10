@@ -70,7 +70,7 @@ Python, LDA (scikit-learn), GPT-4, mBERT, Mistral 7B, HuggingFace Transformers, 
 - April 2026: Stage 1 LDA implementation
 - May 2026: Stage 2 GPT-4 semantic verification
 - June 2026: Stage 3 mBERT + Mistral classification
-- July 2026: Paper writing begins, preliminary results
+- July 2026: Integration testing, preliminary cross-lingual results
 - August 2026: Cross-lingual evaluation and ablation studies
 - September 2026: Ablation studies, cross-lingual evaluation complete
 - October 2026: Paper writing, revisions, final polish
