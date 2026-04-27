@@ -65,7 +65,7 @@ Existing multilingual disinformation systems treat low-resource language perform
 
 The three-stage hybrid architecture is specifically designed for this. LDA's unsupervised topic modeling works without labels — which matters when expert fact-checkers haven't labeled content in a target language. GPT-4 semantic verification handles the code-switching and cultural context that pure transformer classification misses. mBERT + Mistral provides the classification backbone with explicit underrepresented-community weighting in the loss function.
 
-The field is actively debating whether mBERT or XLM-RoBERTa is the right backbone for low-resource cross-lingual transfer. Whether GPT-4 semantic verification generalizes to genuinely low-resource languages or just performs well on European languages with decent pretraining coverage is an open question. HyDMIS runs both ablations and reports the results rather than cherry-picking the favorable comparison.
+The field is actively debating which backbone is right for low-resource cross-lingual transfer — mBERT, XLM-RoBERTa, and RemBERT (Chung et al. 2021) are the three serious contenders, with PolyTruth (arXiv 2509.10737, 2025) showing RemBERT outperforms mBERT specifically on low-resource language subsets. Whether GPT-4 semantic verification generalizes to genuinely low-resource languages or just performs well on European languages with decent pretraining coverage is an open question. HyDMIS ablates all three backbones and reports results rather than cherry-picking the favorable comparison.
 
 ---
 
@@ -154,3 +154,4 @@ Target venue: EMNLP 2026 (arXiv preprint uploaded on submission day)
 - Jiang et al. (2023) — Mistral 7B, arXiv
 - Blei et al. (2003) — Latent Dirichlet Allocation, JMLR
 - OpenAI (2023) — GPT-4 Technical Report
+- Chung et al. (2021) — Rethinking Embedding Coupling in Pre-trained Language Models (RemBERT), ICLR
