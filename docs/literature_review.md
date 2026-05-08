@@ -1,5 +1,5 @@
 # HyDMIS — Literature Review
-## Phase 1 | Five Review Types | Completed May 2026
+## Multilingual Disinformation Detection — Five Review Types
 
 ---
 
