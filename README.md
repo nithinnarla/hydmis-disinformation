@@ -71,25 +71,29 @@ The field is actively debating which backbone is right for low-resource cross-li
 
 ## Datasets
 
-| Dataset | Year | Samples | Language | Domain |
-|---------|------|---------|----------|--------|
-| LIAR | 2017 | 12,800+ | English | News claims |
-| FakeNewsNet | 2020 | 23,000+ | English | News articles |
-| MultiClaim | 2023 | 28,000+ | Multilingual | Social media |
-| Covid-vaccine-misinfo-MIC | 2023 | 5,952 | Multilingual | Health/Social |
-| TruthSeeker | 2023 | 180,000+ | English | Twitter/X |
-| NewsPolyML | 2024 | 32,000+ | European | News/Politics |
-| DeFaktS | 2024 | 105,855 | German/Multi | Twitter/X |
+| Dataset | Year | Samples | Language | Domain | Access |
+|---------|------|---------|----------|--------|--------|
+| LIAR2 | 2024 | 22,962 | English | Political claims | Public |
+| TruthSeeker | 2023 | — | English | Twitter/X | Public — download in progress |
+| FakeNewsNet | 2020 | — | English | News articles | Public — download in progress |
+| Covid-vaccine-misinfo-MIC | 2023 | — | EN/PT/ID | Health/Social | Public — download in progress |
+| NewsPolyML | 2024 | — | EN/DE/ES/FR/IT | News/Politics | Zenodo — download in progress |
+| DeFaktS | 2024 | — | German | Twitter/X | Public — download in progress |
+| MultiClaim | 2023 | 234,000+ | 39 languages | Social media | Pending — Zenodo request submitted |
+| ClimateMiSt | 2025 | 146,670 | English | Climate | Pending — faculty collaboration |
 
-**Total: 387,000+ samples across 7 datasets, 10+ languages, 4 domains**
+**Confirmed: 22,962 samples — LIAR2 verified | Remaining datasets download in progress**
 
 Dataset notes:
-- LIAR and FakeNewsNet are English baselines — used to establish comparability with existing literature, not as primary evaluation targets
-- TruthSeeker (2023) is the largest labeled social media fake news dataset in existence (Dadkhah et al., IEEE TCSS 2023) — primary English benchmark
-- MultiClaim and Covid-vaccine-misinfo-MIC are the critical datasets — multilingual, health-focused, underrepresented community coverage
-- NewsPolyML provides IFCN-certified European multilingual fact-checked claims — bridges English and low-resource evaluation
-- DeFaktS (2024) provides fine-grained Twitter/X labels across elections, climate, and health topics in German and multilingual contexts
-- Note: Disinformation datasets are structurally smaller than general tabular ML datasets — expert fact-checking is the bottleneck, not data collection. 387K+ represents one of the largest multi-dataset collections in this research area.
+- LIAR2 (Xu & Kechadi, 2024) is the updated LIAR benchmark — 22,962 PolitiFact political claims, used to establish comparability with existing literature
+- FakeNewsNet (Shu et al., 2020) — PolitiFact + GossipCop news articles, English baseline
+- TruthSeeker (Dadkhah et al., 2023) — 230,976 Twitter/X posts, largest labeled social media fake news dataset in existence — primary English benchmark
+- Covid-vaccine-misinfo-MIC (Kim et al., 2023) — 5,952 multilingual tweets across Brazil, Indonesia, Nigeria — health misinformation in EN/PT/ID
+- NewsPolyML (Mohtaj et al., 2024) — 32,129 IFCN-certified European multilingual news claims across EN/DE/ES/FR/IT
+- DeFaktS (Ashraf et al., 2024) — 105,855 German Twitter/X posts with fine-grained disinformation annotations
+- MultiClaim (Pikuliak et al., 2023) — 234K+ fact-checked claims across 39 languages — Zenodo institutional access requested
+- ClimateMiSt (Choi, Shang, Wang 2025) — 146,670 climate misinformation tweets — faculty collaboration pending
+- Data access gap: MultiClaim and ClimateMiSt require institutional or author access — the structural bottleneck mirrors the agricultural data gap documented in FAPE
 
 ---
 
@@ -142,7 +146,7 @@ Target venue: EMNLP 2026 (arXiv preprint uploaded on submission day)
 
 ## References
 
-- Wang et al. (2017) — LIAR: A Benchmark Dataset for Fake News Detection, ACL
+- Xu & Kechadi (2024) — LIAR2: An Updated Benchmark for Fake News Detection (based on Wang et al. 2017 LIAR, ACL)
 - Shu et al. (2020) — FakeNewsNet: A Data Repository for Fake News Detection, Big Data
 - Pikuliak et al. (2023) — MultiClaim: Multilingual Claim Detection, arXiv
 - Kim et al. (2023) — Covid-vaccine-misinfo-MIC Dataset
