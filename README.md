@@ -77,12 +77,12 @@ The field is actively debating which backbone is right for low-resource cross-li
 | TruthSeeker | 2023 | 134,198 | English | Twitter/X | Public |
 | FakeNewsNet | 2020 | 23,196 | English | News articles | Public |
 | Covid-vaccine-misinfo-MIC | 2023 | 5,952 | EN/PT/ID | Health/Social | Public |
-| NewsPolyML | 2024 | — | EN/DE/ES/FR/IT | News/Politics | Zenodo — download in progress |
+| NewsPolyML | 2024 | 32,129 | EN/DE/ES/FR/IT | News/Politics | Zenodo |
 | DeFaktS | 2024 | — | German | Twitter/X | Public — download in progress |
 | MultiClaim | 2023 | 234,000+ | 39 languages | Social media | Pending — Zenodo request submitted |
 | ClimateMiSt | 2025 | 146,670 | English | Climate | Pending — faculty collaboration |
 
-**Confirmed: 186,308 samples — LIAR2 + TruthSeeker + FakeNewsNet + Covid-misinfo verified | Remaining datasets download in progress**
+**Confirmed: 218,437 samples — LIAR2 + TruthSeeker + FakeNewsNet + Covid-misinfo + NewsPolyML verified | Remaining datasets download in progress**
 
 Dataset notes:
 - LIAR2 (Xu & Kechadi, 2024) is the updated LIAR benchmark — 22,962 PolitiFact political claims, used to establish comparability with existing literature
