@@ -87,7 +87,7 @@ The field is actively debating which backbone is right for low-resource cross-li
 Dataset notes:
 - LIAR2 (Xu & Kechadi, 2024) is the updated LIAR benchmark — 22,962 PolitiFact political claims, used to establish comparability with existing literature
 - FakeNewsNet (Shu et al., 2020) — PolitiFact + GossipCop news articles, English baseline
-- TruthSeeker (Dadkhah et al., 2023) — 230,976 Twitter/X posts, largest labeled social media fake news dataset in existence — primary English benchmark
+- TruthSeeker (Dadkhah et al., 2023) — 134,198 Twitter/X posts, largest labeled social media fake news dataset in existence — primary English benchmark
 - Covid-vaccine-misinfo-MIC (Kim et al., 2023) — 5,952 multilingual tweets across Brazil, Indonesia, Nigeria — health misinformation in EN/PT/ID
 - NewsPolyML (Mohtaj et al., 2024) — 32,129 IFCN-certified European multilingual news claims across EN/DE/ES/FR/IT
 - DeFaktS (Ashraf et al., 2024) — 105,855 German Twitter/X posts with fine-grained disinformation annotations
