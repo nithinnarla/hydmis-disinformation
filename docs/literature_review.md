@@ -31,7 +31,7 @@ This one reframed how I was thinking about the backbone selection problem. RemBE
 LDA remains the most interpretable unsupervised topic modeling approach for multilingual content. HyDMIS Stage 1 uses LDA specifically because it works without labeled data — which is the only viable approach when expert fact-checkers have not annotated content in a target language. The limitation is well-documented: LDA struggles with short social media texts. HyDMIS addresses this through pre-filtering before LDA application.
 
 **Jiang et al. (2023) — Mistral 7B (arXiv)**
-The open-source LLM that makes Stage 2 semantic verification computationally viable. Mistral 7B outperforms Llama 2 13B on most benchmarks at half the parameter count. For a research pipeline that needs to run on 387K+ samples without a $50K cloud bill, Mistral 7B is the pragmatic choice.
+The open-source LLM that makes Stage 2 semantic verification computationally viable. Mistral 7B outperforms Llama 2 13B on most benchmarks at half the parameter count. For a research pipeline that needs to run on 324,292+ verified samples without a $50K cloud bill, Mistral 7B is the pragmatic choice.
 
 **OpenAI (2023) — GPT-4 Technical Report**
 GPT-4 is HyDMIS Stage 2's semantic verification backbone for the high-confidence labeling pass. The limitation I kept coming back to: GPT-4's performance on genuinely low-resource languages — Swahili, Tagalog, Haitian Creole — is contested in the literature. The system performs well on European languages with decent pretraining coverage. Whether that transfers to languages underrepresented in its training data is one of HyDMIS's explicit ablation questions.
@@ -47,7 +47,7 @@ Political and celebrity news with social context signals. FakeNewsNet's social g
 The most directly relevant multilingual dataset for HyDMIS. Claims across multiple languages with cross-lingual annotations. The gap: MultiClaim's language distribution is European-heavy. The communities HyDMIS targets — Spanish-speaking US Latino communities, Tagalog-speaking Filipino diaspora, Haitian Creole communities — are underrepresented.
 
 **Dadkhah et al. (2023) — TruthSeeker: The Largest Social Media Ground-Truth Dataset (IEEE TCSS)**
-180,000+ labeled Twitter/X posts — the largest labeled social media fake news dataset in existence. HyDMIS uses TruthSeeker as the primary English benchmark to establish comparability with existing literature before moving to multilingual evaluation.
+134,198 labeled Twitter/X posts — the largest labeled social media fake news dataset in existence. HyDMIS uses TruthSeeker as the primary English benchmark to establish comparability with existing literature before moving to multilingual evaluation.
 
 **Gouliev et al. (2025) — PolyTruth: Multilingual Disinformation Detection (arXiv 2509.10737)**
 The paper that most directly validated HyDMIS's research direction. 60,486 statement pairs across 25+ languages covering five language families. Critical finding: RemBERT outperforms mBERT specifically on low-resource language subsets. Performance degradation on low-resource languages is quantified empirically for the first time at this scale. This is HyDMIS's most important recent citation.
