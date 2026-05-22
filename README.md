@@ -119,15 +119,16 @@ Full dependency list: `requirements.txt`
 ## Research Timeline
 
 - February 2026: Research conception and literature review
-- March 2026: Pipeline architecture design and dataset acquisition
-- April 2026: Stage 1 LDA implementation and topic cluster validation
-- May 2026: Stage 2 GPT-4 semantic verification integration
-- June 2026: Stage 3 mBERT + Mistral classification with community-weighted loss
-- July 2026: Integration testing and preliminary cross-lingual results
-- August 2026: Cross-lingual evaluation and ablation studies
-- September 2026: Final ablations, cross-lingual evaluation complete
-- October 2026: Paper writing, revisions, final polish
-- November 2026: Target submission — EMNLP + arXiv simultaneously
+- March 2026: Pipeline architecture design and dataset planning — three-stage hybrid approach finalized, dataset shortlist identified
+- April 2026: GitHub repository created, pipeline architecture and research question documented
+- May 2026: Dataset pipeline complete — 6 datasets verified, literature review documented
+- June 2026: Stage 1 LDA implementation and topic cluster validation
+- July 2026: Stage 2 GPT-4 semantic verification integration
+- August 2026: Stage 3 mBERT + Mistral classification with community-weighted loss
+- September 2026: Integration testing and preliminary cross-lingual results
+- October 2026: Cross-lingual evaluation and ablation studies
+- November 2026: Final ablations, cross-lingual evaluation complete
+- December 2026: Paper writing, revisions, final polish, and target submission — EMNLP + arXiv simultaneously
 
 ---
 
