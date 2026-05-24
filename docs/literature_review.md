@@ -5,7 +5,9 @@
 
 ## How I Approached This
 
-Eight years of watching ML systems fail quietly in production taught me one thing: the systems that fail the loudest are the ones nobody was watching. Disinformation detection is one of those systems. The English benchmark numbers look impressive. The deployment reality for Spanish, Tagalog, and Haitian Creole communities is a different story entirely.
+During the COVID pandemic I watched multilingual disinformation outpace every detection system built to catch it. The English content was being flagged — imperfectly, but flagged. The Spanish WhatsApp forwards about vaccine microchips, the Tagalog Facebook posts about herbal cures, the Haitian Creole Telegram channels spreading treatment misinformation — invisible to every deployed system. Not because the problem was harder. Because nobody had built for those communities.
+
+That observation stayed with me. By 2025 the disinformation landscape had expanded — health, agricultural, climate misinformation spreading through the same channels, same languages, same underserved communities. The detection systems had improved on English benchmarks. The community-level gap had not closed. That is what HyDMIS is built to address.
 
 This literature review covers five review types across the multilingual disinformation detection landscape. I came in skeptical of the standard framing — "multilingual models work, low-resource is just a harder version of the same problem." The literature disabused me of that quickly.
 
