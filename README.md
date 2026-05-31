@@ -124,7 +124,7 @@ Full dependency list: `requirements.txt`
 - May 2026: Dataset pipeline complete — 6 datasets verified, literature review documented
 - June 2026: Stage 1 LDA implementation and topic cluster validation
 - July 2026: Stage 2 GPT-4 semantic verification integration
-- August 2026: Stage 3 mBERT + Mistral classification with community-weighted loss
+- August 2026: Stage 3 mBERT + XLM-R + RemBERT + Mistral classification with community-weighted loss
 - September 2026: Integration testing and preliminary cross-lingual results
 - October 2026: Cross-lingual evaluation and ablation studies
 - November 2026: Final ablations, cross-lingual evaluation complete
