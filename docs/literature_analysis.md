@@ -137,7 +137,7 @@ HyDMIS documents this gap and positions it as future work.
 
 ### Weakest paper under methodological scrutiny:
 
-**LIAR (Wang et al., 2017):** Six-way veracity labels from single annotator organization. 100% English, 100% formal political discourse. Holds up worst on: generalizability to social media content, non-English claims, health disinformation. HyDMIS uses LIAR only as baseline comparability benchmark.
+**LIAR (Wang et al., 2017):** Six-way veracity labels from single annotator organization. 100% English, 100% formal political discourse. Holds up worst on: generalizability to social media content, non-English claims, health disinformation. HyDMIS uses LIAR2 (the extended version) only as baseline comparability benchmark.
 
 ---
 
@@ -178,7 +178,7 @@ LDA's short text limitation is documented going back to the topic modeling liter
 Aggregate count looks strong. But when I break it down by language and community subset, Tagalog, Haitian Creole, and agricultural community language examples may be under 1K each. Fairness metrics become unreliable below roughly 500 examples per group. If subgroup sample sizes are too small, the community-stratified evaluation I'm planning becomes statistically indefensible.
 
 **Assumption 5 — Cross-domain transfer holds across health, climate, and political disinformation:**
-LIAR is political. ClimateMiSt is climate. Covid-vaccine-misinfo-MIC is health. These domains use different vocabulary, different claim structures, different disinformation tactics. The pipeline must generalize across all three — tested in Phase 4 cross-dataset evaluation. If it doesn't generalize, the paper scope narrows to the domains where it does.
+LIAR2 is political. ClimateMiSt is climate. Covid-vaccine-misinfo-MIC is health. These domains use different vocabulary, different claim structures, different disinformation tactics. The pipeline must generalize across all three — tested in Phase 4 cross-dataset evaluation. If it doesn't generalize, the paper scope narrows to the domains where it does.
 
 **Assumption 6 — Detection improvement translates to harm reduction at deployment:**
 This is the hardest assumption to defend and the most important one. Better F1 on a benchmark doesn't automatically mean less disinformation exposure for real communities. HyDMIS approximates harm reduction through platform-scale simulation rather than live deployment — which is the honest limitation of academic research that doesn't have API access to production systems. The paper will say this explicitly.
@@ -204,7 +204,7 @@ METHODOLOGICAL LANDSCAPE
     └── RemBERT — best empirical evidence (PolyTruth 2025)
 
 DATASET LANDSCAPE
-├── English baselines: LIAR, FakeNewsNet, TruthSeeker
+├── English baselines: LIAR2, FakeNewsNet, TruthSeeker
 ├── Multilingual general: MultiClaim, NewsPolyML, DeFaktS
 ├── Health-specific: Covid-vaccine-misinfo-MIC
 ├── Climate/environment: ClimateMiSt (Dong Wang, UIUC)
