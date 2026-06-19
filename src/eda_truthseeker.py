@@ -131,6 +131,15 @@ def run_eda():
         print(f"    {str(kw):<30} n={cnt:,}")
     print(f"  Note: Disinformation — COVID/election topics; Credible — policy debates")
 
+
+    print(f"\n--- NO MAJORITY Analysis ---")
+    no_maj = df[df['5_label_majority_answer']=='NO MAJORITY']
+    has_maj = df[df['5_label_majority_answer']!='NO MAJORITY']
+    print(f"  NO MAJORITY records: {len(no_maj):,} ({len(no_maj)/len(df):.1%})")
+    print(f"  NO MAJORITY dis rate: {no_maj['binary_label'].mean():.1%}")
+    print(f"  Has majority dis rate: {has_maj['binary_label'].mean():.1%}")
+    print(f"  Note: NO MAJORITY cases ambiguous — special handling needed in HyDMIS Stage 1")
+
     print(f"\n--- Key Observations ---")
     print(f"  Total records: {len(df):,}")
     print(f"  Binary disinformation rate: {df['binary_label'].mean():.1%}")
