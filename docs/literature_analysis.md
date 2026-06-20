@@ -19,7 +19,7 @@
 | OpenAI — GPT-4 | 2023 | Tech Report | SOTA LLM semantic reasoning | LLM verification | Low-resource generalization contested |
 | Pikuliak et al. — MultiClaim | 2023 | arXiv | Multilingual claim dataset | Dataset | European-heavy distribution |
 | Dadkhah et al. — TruthSeeker | 2023 | IEEE TCSS | Largest social media fake news dataset | Dataset | English-only |
-| Kim et al. — Covid-vaccine-misinfo-MIC | 2023 | — | Health misinformation multilingual | Dataset | Venue TBD |
+| Kim et al. — Covid-vaccine-misinfo-MIC | 2023 | — | Health misinformation multilingual | Dataset | EMNLP 2023 |
 | Mohtaj et al. — NewsPolyML | 2024 | — | European multilingual news claims | Dataset | European-only |
 | Ashraf et al. — DeFaktS | 2024 | — | German/multilingual Twitter dataset | Dataset | German-heavy |
 | Alghamdi et al. | 2024 | KBS | Hybrid summarization low-resource FND | Hybrid methods | Summarization scope only |
@@ -269,4 +269,4 @@ If it works, HyDMIS changes what multilingual disinformation detection means —
 All references as listed in literature_review.md plus:
 - Bansal et al. (2024) — MMCFND: Multimodal Multilingual Fake News Detection, 7 Indic languages
 - Choi, Shang, Wang (2025) — ClimateMiSt: Climate Change Misinformation and Stance Detection Dataset, ASONAM 2024
-- Kim et al. (2023) — Covid-vaccine-misinfo-MIC — venue to be confirmed before Phase 5
+- Kim et al. (2023) — Covid-vaccine-misinfo-MIC — EMNLP 2023 (confirmed)
