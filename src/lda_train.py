@@ -310,6 +310,67 @@ def run_lda_train():
     plt.savefig("figures/stage1/lda_english_topic_dist.png", dpi=150, bbox_inches="tight")
     plt.close(); print("Fig 5 saved -- lda_english_topic_dist.png")
 
+
+    # Fig 6 -- Topic Distribution German
+    vec_de2 = CountVectorizer(max_features=MAX_FEATURES, stop_words=de_stopwords,
+                              min_df=5, max_df=0.95, ngram_range=(1, 2))
+    dtm_de2 = vec_de2.fit_transform(de_texts)
+    dominant_de = np.argmax(de_lda.transform(dtm_de2), axis=1)
+    n_de = int(best_de["n_topics"])
+    counts_de = np.bincount(dominant_de, minlength=n_de)
+    fig, ax = plt.subplots(figsize=(12, 5))
+    colors_de = plt.cm.Set2(np.linspace(0, 1, len(counts_de)))
+    bars = ax.bar(range(len(counts_de)), counts_de, color=colors_de, edgecolor="white")
+    for bar, val in zip(bars, counts_de):
+        ax.text(bar.get_x()+bar.get_width()/2, val+50, str(val), ha="center", fontsize=8)
+    ax.set_xticks(range(len(counts_de)))
+    ax.set_xticklabels([f"T{i}" for i in range(len(counts_de))])
+    ax.set_title(f"German Corpus (DeFaktS) -- Topic Distribution ({n_de} topics, {len(de_texts):,} texts)",
+                fontsize=11, fontweight="bold")
+    ax.set_xlabel("Topic"); ax.set_ylabel("Number of Texts")
+    plt.tight_layout()
+    plt.savefig("figures/stage1/lda_german_topic_dist.png", dpi=150, bbox_inches="tight")
+    plt.close(); print("Fig 6 saved -- lda_german_topic_dist.png")
+
+    # Fig 7 -- Topic Distribution Multilingual
+    vec_multi2 = CountVectorizer(max_features=MAX_FEATURES, stop_words=get_english_stopwords(),
+                                 min_df=5, max_df=0.95, ngram_range=(1, 2))
+    dtm_multi2 = vec_multi2.fit_transform(npm_texts)
+    dominant_multi = np.argmax(multi_lda.transform(dtm_multi2), axis=1)
+    n_multi = int(best_multi["n_topics"])
+    counts_multi = np.bincount(dominant_multi, minlength=n_multi)
+    fig, ax = plt.subplots(figsize=(12, 5))
+    colors_multi = plt.cm.Paired(np.linspace(0, 1, len(counts_multi)))
+    bars = ax.bar(range(len(counts_multi)), counts_multi, color=colors_multi, edgecolor="white")
+    for bar, val in zip(bars, counts_multi):
+        ax.text(bar.get_x()+bar.get_width()/2, val+20, str(val), ha="center", fontsize=8)
+    ax.set_xticks(range(len(counts_multi)))
+    ax.set_xticklabels([f"T{i}" for i in range(len(counts_multi))])
+    ax.set_title(f"Multilingual Corpus (NewsPolyML) -- Topic Distribution ({n_multi} topics, {len(npm_texts):,} texts)",
+                fontsize=11, fontweight="bold")
+    ax.set_xlabel("Topic"); ax.set_ylabel("Number of Texts")
+    plt.tight_layout()
+    plt.savefig("figures/stage1/lda_multilingual_topic_dist.png", dpi=150, bbox_inches="tight")
+    plt.close(); print("Fig 7 saved -- lda_multilingual_topic_dist.png")
+
+
+    # Fig 8 -- Top Words Multilingual
+    multi_top_words = get_top_words(multi_lda, multi_vec, n_words=8)
+    n_t_multi = len(multi_top_words)
+    fig, ax = plt.subplots(figsize=(14, max(6, n_t_multi*0.8)))
+    ax.axis("off")
+    tbl = ax.table(cellText=[[", ".join(w[:8])] for w in multi_top_words],
+                   rowLabels=[f"Topic {i}" for i in range(n_t_multi)],
+                   colLabels=["Top 8 Words (Multilingual EN/DE/ES/FR/IT)"],
+                   cellLoc="left", loc="center")
+    tbl.auto_set_font_size(False); tbl.set_fontsize(9)
+    tbl.auto_set_column_width([0])
+    ax.set_title(f"Multilingual LDA (NewsPolyML) -- Top Words per Topic ({n_t_multi} topics)",
+                fontsize=12, fontweight="bold", pad=20)
+    plt.tight_layout()
+    plt.savefig("figures/stage1/lda_multilingual_topics.png", dpi=150, bbox_inches="tight")
+    plt.close(); print("Fig 8 saved -- lda_multilingual_topics.png")
+
     print(f"\n--- LDA Training complete ---")
     print(f"  6 figures saved to figures/stage1/")
     print(f"  Optimal topics: English={int(best_en['n_topics'])}, German={int(best_de['n_topics'])}, Multilingual={int(best_multi['n_topics'])}")
