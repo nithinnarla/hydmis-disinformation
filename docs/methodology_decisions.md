@@ -154,9 +154,9 @@ PolyTruth (2025) established this as the right evaluation methodology for low-re
 
 ---
 
-## Decision 9 — EMNLP November 2026 as Target Venue
+## Decision 9 — EMNLP 2027 as Target Venue
 
-**Decision:** Submit to EMNLP 2026, with arXiv preprint uploaded October 2026.
+**Decision:** Submit to EMNLP 2027 via ACL Rolling Review (~May 2027), with arXiv preprint uploaded December 2026.
 
 **Alternatives considered:**
 - ACL 2027: more prestigious, more time for Phase 4 and writing
@@ -164,11 +164,12 @@ PolyTruth (2025) established this as the right evaluation methodology for low-re
 - ACL Findings 2026: lower bar, faster turnaround
 - COLING 2026: strong multilingual NLP track
 
-**Why EMNLP 2026:**
-Research question alignment with EMNLP's empirical NLP focus. SemEval 2025 Task 7 was co-hosted at EMNLP — the multilingual disinformation community is already positioned at this venue. Timeline: Phase 4 starts May 2026, 6 months to implement and write before November submission. arXiv preprint October 2026 establishes priority before PhD application deadline October 20.
+**Why EMNLP 2027:**
+EMNLP 2026 ARR submission deadline was May 25, 2026 — missed. NAACL 2027 ARR deadline is approximately October 2026 — before HyDMIS paper writing begins. ACL 2027 ARR deadline is approximately February 2027 — possible but tight. EMNLP 2027 ARR deadline approximately May 2027 gives sufficient time to write, revise, and polish a strong paper after December 2026 manuscript completion. EMNLP is the strongest venue for empirical multilingual NLP — submitting to ACL first and falling back to EMNLP is the alternative if ACL 2027 deadline is confirmed achievable.
 
-**Why not ACL 2027:**
-Waiting until 2027 means the paper is not under review during the PhD application window. The arXiv preprint strategy partially mitigates this but submitted-to-venue status is stronger than preprint-only for application materials.
+**arXiv preprint December 2026:** Posted after manuscript complete. Establishes priority and provides a citable preprint for PhD application materials even though no venue has accepted the paper at that point.
+
+**PhD application strategy:** HyDMIS listed as "manuscript in preparation" on Oct 20 iSchool application and manuscript attached to Dec 1 Informatics application. Neither deadline requires the paper to be under peer review.
 
 ---
 

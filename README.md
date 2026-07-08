@@ -128,14 +128,14 @@ Full dependency list: `requirements.txt`
 - September 2026: Integration testing and preliminary cross-lingual results
 - October 2026: Cross-lingual evaluation and ablation studies
 - November 2026: Final ablations, cross-lingual evaluation complete
-- December 2026: Paper writing, revisions, final polish, and target submission — EMNLP + arXiv simultaneously
+- December 2026: Paper writing, revisions, final polish — arXiv preprint December 2026. EMNLP 2027 ARR submission ~May 2027
 
 ---
 
 ## Status
 
 🔬 Research in progress
-Target venue: EMNLP 2026 (arXiv preprint uploaded on submission day)
+Target venue: EMNLP 2027 — ARR submission ~May 2027 (arXiv preprint December 2026)
 
 ---
 
