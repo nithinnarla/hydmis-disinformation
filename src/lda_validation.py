@@ -286,6 +286,7 @@ def run_lda_validation():
         'ml_coherence': ml_score,
         'en_per_topic': en_per_topic,
         'de_per_topic': de_per_topic,
+        'ml_per_topic': ml_per_topic,
         'en_distance': en_dist,
         'de_distance': de_dist,
         'ml_distance': ml_dist
