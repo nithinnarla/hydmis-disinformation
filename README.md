@@ -122,8 +122,8 @@ Full dependency list: `requirements.txt`
 - March 2026: Pipeline architecture design and dataset planning — three-stage hybrid approach finalized, dataset shortlist identified
 - April 2026: GitHub repository created, pipeline architecture and research question documented
 - May 2026: Dataset pipeline complete — 6 datasets verified, literature review documented
-- June 2026: Stage 1 LDA implementation and topic cluster validation
-- July 2026: Stage 2 GPT-4 semantic verification integration
+- June 2026: Stage 1 LDA implementation complete — lda_pipeline.py, lda_train.py, lda_topic_clusters.py (9 figures: topic-veracity cross-tabs across all 5 datasets)
+- July 2026: Stage 1 validation complete — lda_validation.py (C_v coherence English 0.354 German 0.392 Multilingual 0.376; inter-topic distances 0.921-0.984; 7 figures); Stage 2 GPT-4 semantic verification integration begins
 - August 2026: Stage 3 mBERT + XLM-R + RemBERT + Mistral classification with community-weighted loss
 - September 2026: Integration testing and preliminary cross-lingual results
 - October 2026: Cross-lingual evaluation and ablation studies
@@ -134,7 +134,12 @@ Full dependency list: `requirements.txt`
 
 ## Status
 
-🔬 Research in progress
+🔬 Research in progress — Stage 1 complete, Stage 2 underway
+
+**Stage 1 (complete):** LDA topic modeling across 5 datasets (LIAR2, TruthSeeker, FakeNewsNet, DeFaktS, NewsPolyML) — English (10 topics), German (8 topics), Multilingual (10 topics). Topic-veracity cross-tabulation, C_v coherence validation, inter-topic distance analysis. 16 figures committed.
+
+**Stage 2 (starting July 2026):** GPT-4 semantic verification of topic assignments.
+
 Target venue: EMNLP 2027 — ARR submission ~May 2027 (arXiv preprint December 2026)
 
 ---
