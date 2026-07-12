@@ -136,9 +136,8 @@ Full dependency list: `requirements.txt`
 
 🔬 Research in progress — Stage 1 complete, Stage 2 underway
 
-**Stage 1 (complete):** LDA topic modeling across 5 datasets (LIAR2, TruthSeeker, FakeNewsNet, DeFaktS, NewsPolyML) — English (10 topics), German (8 topics), Multilingual (10 topics). Topic-veracity cross-tabulation, C_v coherence validation, inter-topic distance analysis. 16 figures committed.
-
-**Stage 2 (starting July 2026):** GPT-4 semantic verification of topic assignments.
+**Stage 1 (complete):** LDA topic modeling across 5 multilingual datasets — 24 figures committed.
+**Stage 2 (in progress):** GPT-4 semantic verification of topic assignments.
 
 Target venue: EMNLP 2027 — ARR submission ~May 2027 (arXiv preprint December 2026)
 
