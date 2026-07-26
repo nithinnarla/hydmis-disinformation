@@ -9,7 +9,7 @@
 - LIAR2: 22,962 records (Wang et al. 2017, extended version)
 - TruthSeeker: 134,198 records (Dadkhah et al. 2023)
 - FakeNewsNet: 23,196 records (Shu et al. 2020)
-- Covid-vaccine-misinfo-MIC: 5,952 records (Kim et al. 2023 — venue under verification before Phase 5)
+- Covid-vaccine-misinfo-MIC: 5,952 records (Kim et al. 2023 — EMNLP 2023, confirmed)
 - NewsPolyML: 32,129 records (Mohtaj et al. 2024)
 - DeFaktS: 105,855 records (Ashraf et al. 2024)
 - MultiClaim: 234,000+ pending Zenodo access (Pikuliak et al. 2023)
@@ -122,7 +122,7 @@ Fairness metrics become unreliable below roughly 500 examples per subgroup. Data
 
 **FakeNewsNet (23,196):** Social context features available but HyDMIS uses content features only — social graph information is unavailable for low-resource community content and any evaluation that depends on it cannot generalize to target communities.
 
-**Covid-vaccine-misinfo-MIC (5,952):** The only health domain multilingual dataset in the verified pipeline. Small but essential — covers the specific health misinformation domain most relevant to target communities. Kim et al. (2023) venue under verification before Phase 5 paper writing.
+**Covid-vaccine-misinfo-MIC (5,952):** The only health domain multilingual dataset in the verified pipeline. Small but essential — covers the specific health misinformation domain most relevant to target communities. Kim et al. (2023) — EMNLP 2023 (confirmed).
 
 **NewsPolyML (32,129):** European multilingual news claims. Adds non-English European language coverage that strengthens cross-lingual transfer evaluation even though European languages are not the primary target communities.
 
@@ -203,7 +203,7 @@ Three design choices drive HyDMIS. First, LDA for Stage 1 — the only viable un
 - OpenAI (2023) — GPT-4 Technical Report
 - Pikuliak et al. (2023) — MultiClaim, arXiv
 - Dadkhah et al. (2023) — TruthSeeker, IEEE TCSS
-- Kim et al. (2023) — Covid-vaccine-misinfo-MIC (venue under verification)
+- Kim et al. (2023) — Covid-vaccine-misinfo-MIC (EMNLP 2023, confirmed)
 - Mohtaj et al. (2024) — NewsPolyML (venue under verification before Phase 5)
 - Ashraf et al. (2024) — DeFaktS (venue under verification before Phase 5)
 - Bansal et al. (2024) — MMCFND, 7 Indic languages (venue under verification before Phase 5)
