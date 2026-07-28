@@ -25,7 +25,6 @@ sys.path.insert(0, os.path.dirname(__file__))
 
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.decomposition import LatentDirichletAllocation
-from sklearn.model_selection import cross_val_score
 import re
 import string
 

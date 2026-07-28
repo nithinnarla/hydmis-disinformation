@@ -29,7 +29,6 @@ sys.path.insert(0, os.path.dirname(__file__))
 
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.decomposition import LatentDirichletAllocation
-from sklearn.preprocessing import LabelEncoder
 
 import re
 import string
