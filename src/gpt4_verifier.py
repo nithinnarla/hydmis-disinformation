@@ -241,4 +241,4 @@ def run_gpt4_verifier(dry_run=False, max_records=None):
 
 if __name__ == "__main__":
     # Default: dry run — set dry_run=False and provide API key for live run
-    run_gpt4_verifier(dry_run=True, max_records=100)
+    run_gpt4_verifier(dry_run=False)
