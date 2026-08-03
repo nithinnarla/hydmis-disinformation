@@ -27,11 +27,10 @@ import warnings
 warnings.filterwarnings("ignore")
 sys.path.insert(0, os.path.dirname(__file__))
 
-from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.decomposition import LatentDirichletAllocation
 
 import re
-import string
 
 # LDA configuration
 N_TOPICS_ENGLISH = 10
@@ -153,20 +152,28 @@ def run_pipeline():
     print(f"\n--- English LDA Preprocessing ---")
     en_stopwords = get_english_stopwords()
 
-    liar2_texts = [clean_text(t) for t in liar2_df['statement'].astype(str)]
-    liar2_texts = [t for t in liar2_texts if t]
+    liar2_pairs = [(idx, clean_text(t)) for idx, t in zip(liar2_df.index, liar2_df['statement'].astype(str))]
+    liar2_pairs = [(idx, t) for idx, t in liar2_pairs if t]
+    liar2_ids = [idx for idx, t in liar2_pairs]
+    liar2_texts = [t for idx, t in liar2_pairs]
     print(f"  LIAR2 clean texts: {len(liar2_texts):,}")
 
     ts_sample = ts_df.sample(min(SAMPLE_SIZE, len(ts_df)), random_state=RANDOM_STATE)
-    ts_texts = [clean_text(t) for t in ts_sample['statement'].astype(str)]
-    ts_texts = [t for t in ts_texts if t]
+    ts_pairs = [(idx, clean_text(t)) for idx, t in zip(ts_sample.index, ts_sample['statement'].astype(str))]
+    ts_pairs = [(idx, t) for idx, t in ts_pairs if t]
+    ts_ids = [idx for idx, t in ts_pairs]
+    ts_texts = [t for idx, t in ts_pairs]
     print(f"  TruthSeeker clean texts: {len(ts_texts):,}")
 
-    fnn_texts = [clean_text(t) for t in fnn_df['title'].astype(str)]
-    fnn_texts = [t for t in fnn_texts if t]
+    fnn_pairs = [(idx, clean_text(t)) for idx, t in zip(fnn_df.index, fnn_df['title'].astype(str))]
+    fnn_pairs = [(idx, t) for idx, t in fnn_pairs if t]
+    fnn_ids = [idx for idx, t in fnn_pairs]
+    fnn_texts = [t for idx, t in fnn_pairs]
     print(f"  FakeNewsNet clean texts: {len(fnn_texts):,}")
 
     english_texts = liar2_texts + ts_texts + fnn_texts
+    english_source = (['liar2'] * len(liar2_texts) + ['truthseeker'] * len(ts_texts) + ['fakenewsnet'] * len(fnn_texts))
+    english_ids = liar2_ids + ts_ids + fnn_ids
     print(f"  Combined English corpus: {len(english_texts):,} texts")
 
     print(f"\n--- English LDA ({N_TOPICS_ENGLISH} topics) ---")
@@ -187,8 +194,10 @@ def run_pipeline():
     print(f"\n--- German LDA Preprocessing (DeFaktS) ---")
     de_stopwords = get_german_stopwords()
     defakts_sample = defakts_df.sample(min(SAMPLE_SIZE, len(defakts_df)), random_state=RANDOM_STATE)
-    de_texts = [clean_text(t, language='de') for t in defakts_sample['text'].astype(str)]
-    de_texts = [t for t in de_texts if t]
+    de_pairs = [(idx, clean_text(t, language='de')) for idx, t in zip(defakts_sample.index, defakts_sample['text'].astype(str))]
+    de_pairs = [(idx, t) for idx, t in de_pairs if t]
+    de_ids = [idx for idx, t in de_pairs]
+    de_texts = [t for idx, t in de_pairs]
     print(f"  DeFaktS clean texts: {len(de_texts):,}")
 
     print(f"\n--- German LDA ({N_TOPICS_GERMAN} topics) ---")
@@ -207,8 +216,10 @@ def run_pipeline():
         print(f"  Topic {i:2d}: {count:>5,} texts ({count/len(de_texts):.1%})")
 
     print(f"\n--- Multilingual LDA Preprocessing (NewsPolyML) ---")
-    npm_texts = [clean_text(str(t)) for t in npm_df['claim_reviewed'].astype(str)]
-    npm_texts = [t for t in npm_texts if t]
+    npm_pairs = [(idx, clean_text(str(t))) for idx, t in zip(npm_df.index, npm_df['claim_reviewed'].astype(str))]
+    npm_pairs = [(idx, t) for idx, t in npm_pairs if t]
+    npm_ids = [idx for idx, t in npm_pairs]
+    npm_texts = [t for idx, t in npm_pairs]
     print(f"  NewsPolyML clean texts: {len(npm_texts):,}")
     if 'language' in npm_df.columns:
         lang_dist = npm_df['language'].value_counts()
@@ -237,6 +248,24 @@ def run_pipeline():
     print(f"  LDA separates health, political, and social disinformation clusters unsupervised")
     print(f"  German LDA separate model — textstat FK confirmed unusable for German")
     print(f"  Stage 1 complete — topic assignments ready for Stage 2 GPT-4 verification")
+
+    print(f"\n--- Saving Topic Assignments ---")
+    assignments_records = []
+    for source, rec_id, topic in zip(english_source, english_ids, en_assignments):
+        assignments_records.append({"dataset": source, "record_id": rec_id, "lda_topic_id": int(topic), "lda_model": "english"})
+    for rec_id, topic in zip(de_ids, de_assignments):
+        assignments_records.append({"dataset": "defakts", "record_id": rec_id, "lda_topic_id": int(topic), "lda_model": "german"})
+    for rec_id, topic in zip(npm_ids, multi_assignments):
+        assignments_records.append({"dataset": "newspolyml", "record_id": rec_id, "lda_topic_id": int(topic), "lda_model": "multilingual"})
+
+    assignments_df = pd.DataFrame(assignments_records)
+    output_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "processed", "lda_topic_assignments.csv")
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    assignments_df.to_csv(output_path, index=False)
+    print(f"  Saved {len(assignments_df):,} topic assignments to {output_path}")
+    print(f"  Columns: dataset, record_id, lda_topic_id, lda_model")
+    print(f"  This file did not exist before -- gpt4_sampler.py previously used a hardcoded")
+    print(f"  lda_topic_id=-1 placeholder because no LDA output was ever persisted to disk.")
 
     print(f"\n--- LDA Pipeline complete ---")
     print(f"  3 LDA models trained: English, German, Multilingual")
