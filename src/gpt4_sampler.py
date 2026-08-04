@@ -92,9 +92,10 @@ def load_and_sample_liar2(n):
     df['veracity'] = df['label'].astype(str)
     df['language'] = 'en'
     df['dataset'] = 'liar2'
+    df['record_id'] = df.index
     sampled = stratified_sample(df, 'veracity', n)
     print(f"  LIAR2:       {len(sampled):,} records sampled")
-    return sampled[['text', 'dataset', 'language', 'veracity']]
+    return sampled[['text', 'dataset', 'language', 'veracity', 'record_id']]
 
 
 def load_and_sample_truthseeker(n):
@@ -105,9 +106,10 @@ def load_and_sample_truthseeker(n):
     df['veracity'] = df['BinaryNumTarget'].astype(str)
     df['language'] = 'en'
     df['dataset'] = 'truthseeker'
+    df['record_id'] = df.index
     sampled = stratified_sample(df, 'veracity', n)
     print(f"  TruthSeeker: {len(sampled):,} records sampled")
-    return sampled[['text', 'dataset', 'language', 'veracity']]
+    return sampled[['text', 'dataset', 'language', 'veracity', 'record_id']]
 
 
 def load_and_sample_fakenewsnet(n):
@@ -118,9 +120,10 @@ def load_and_sample_fakenewsnet(n):
     df['veracity'] = df['label'].astype(str)
     df['language'] = 'en'
     df['dataset'] = 'fakenewsnet'
+    df['record_id'] = df.index
     sampled = stratified_sample(df, 'veracity', n)
     print(f"  FakeNewsNet: {len(sampled):,} records sampled")
-    return sampled[['text', 'dataset', 'language', 'veracity']]
+    return sampled[['text', 'dataset', 'language', 'veracity', 'record_id']]
 
 
 def load_and_sample_defakts(n):
@@ -131,9 +134,10 @@ def load_and_sample_defakts(n):
     df['veracity'] = df['binary_label'].astype(str)
     df['language'] = df['Language'].astype(str)
     df['dataset'] = 'defakts'
+    df['record_id'] = df.index
     sampled = stratified_sample(df, 'veracity', n)
     print(f"  DeFaktS:     {len(sampled):,} records sampled")
-    return sampled[['text', 'dataset', 'language', 'veracity']]
+    return sampled[['text', 'dataset', 'language', 'veracity', 'record_id']]
 
 
 def load_and_sample_newspolyml(n):
@@ -144,11 +148,12 @@ def load_and_sample_newspolyml(n):
     df['veracity'] = df['normalized_label'].astype(str)
     df['language'] = df['article_language'].astype(str)
     df['dataset'] = 'newspolyml'
+    df['record_id'] = df.index
     # Drop rows with empty text
     df = df[df['text'].str.len() > 10]
     sampled = stratified_sample(df, 'veracity', n)
     print(f"  NewsPolyML:  {len(sampled):,} records sampled")
-    return sampled[['text', 'dataset', 'language', 'veracity']]
+    return sampled[['text', 'dataset', 'language', 'veracity', 'record_id']]
 
 
 def run_gpt4_sampler():
