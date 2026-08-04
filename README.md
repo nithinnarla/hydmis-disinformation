@@ -124,7 +124,7 @@ Full dependency list: `requirements.txt`
 - May 2026: Dataset pipeline complete — 6 datasets verified, literature review documented
 - June 2026: Stage 1 LDA implementation complete — lda_pipeline.py (3 models: English/German/Multilingual), lda_train.py (8 figures), lda_topic_clusters.py (9 figures: topic-veracity cross-tabs across all 5 datasets); 17 figures total
 - July 2026: Stage 1 validation complete — lda_validation.py (C_v coherence English 0.354 German 0.392 Multilingual 0.376; inter-topic distances 0.921-0.984; 7 figures); Stage 2 GPT-4 semantic verification integration begins
-- August 2026: Stage 3 mBERT + XLM-R + RemBERT + Mistral classification with community-weighted loss
+- August 2026: Stage 2 complete — GPT-4 semantic verification of 14,640 records (0 errors, label distribution UNCERTAIN=6,181 YES=4,620 NO=3,838 PARTIAL=1); code-switching detection flagger built and validated against known confidence-score limitations (756 records / 5.2% flagged); lda_pipeline.py fixed to persist real topic assignments (177,074 records, previously never saved to disk); Stage 2 ablation quantifies LDA-alone veracity prediction at only +3.6pp over baseline (42.1% -> 45.7%), confirming GPT-4 verification provides the pipeline's real discriminative signal; Stage 3 mBERT + XLM-R + RemBERT + Mistral classification with community-weighted loss begins
 - September 2026: Integration testing and preliminary cross-lingual results
 - October 2026: Cross-lingual evaluation and ablation studies
 - November 2026: Final ablations, cross-lingual evaluation complete
@@ -134,10 +134,10 @@ Full dependency list: `requirements.txt`
 
 ## Status
 
-🔬 Research in progress — Stage 1 complete, Stage 2 underway
+🔬 Research in progress — Stages 1-2 complete, Stage 3 starting
 
-**Stage 1 (complete):** LDA topic modeling across 5 multilingual datasets — 24 figures committed.
-**Stage 2 (in progress):** GPT-4 semantic verification of topic assignments.
+**Stage 1 (complete):** LDA topic modeling across 5 multilingual datasets — 24 figures committed. Topic assignments now persisted to data/processed/lda_topic_assignments.csv (177,074 records) via lda_pipeline.py -- previously never saved to disk (see methodology_decisions.md Decision 11).
+**Stage 2 (complete):** GPT-4 semantic verification — 14,640 records verified, 0 errors (gpt4_verifier.py). Code-switching screening flag built (code_switching_flagger.py, 756 records / 5.2% flagged, known confidence-score limitations documented). Stage 2 ablation (stage2_ablation.py) confirms GPT-4 verification adds real discriminative value over LDA topic alone: baseline majority-class guess 42.1% vs. 45.7% knowing LDA topic (+3.6pp) -- see methodology_decisions.md Decision 12.
 
 Target venue: EMNLP 2027 — ARR submission ~May 2027 (arXiv preprint December 2026)
 
