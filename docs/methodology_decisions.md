@@ -1,30 +1,30 @@
-# HyDMIS — Methodology Decisions Log
-## Multilingual Disinformation Detection — Methodology Decisions
+# HyDMIS, Methodology Decisions Log
+## Multilingual Disinformation Detection, Methodology Decisions
 
 ---
 
 ## How to Read This Document
 
-This is a decisions log, not a polished writeup. Every major methodological choice is documented here with the alternatives I considered and why I made the call I made. Some decisions I'm confident about. A few I'm still not completely certain about — those are marked with a note.
+This is a decisions log, not a polished writeup. Every major methodological choice is documented here with the alternatives I considered and why I made the call I made. Some decisions I'm confident about. A few I'm still not completely certain about, those are marked with a note.
 
-The point of documenting decisions before writing code is to prevent the most common research mistake: making a decision implicitly during implementation and then justifying it post-hoc in the paper. Every decision here was made before Phase 4 starts. If Phase 4 produces results that contradict a decision, the decision gets updated — but the reasoning trail stays visible.
+The point of documenting decisions before writing code is to prevent the most common research mistake: making a decision implicitly during implementation and then justifying it post-hoc in the paper. Every decision here was made before Phase 4 starts. If Phase 4 produces results that contradict a decision, the decision gets updated, but the reasoning trail stays visible.
 
 ---
 
-## Decision 1 — Research Question Type: Comparative + Causal
+## Decision 1, Research Question Type: Comparative + Causal
 
 **Decision:** HyDMIS is a Comparative + Causal research question. Comparative: hybrid pipeline vs single-model baselines across language resource levels. Causal: does detection improvement translate to harm reduction for targeted communities?
 
 **Alternatives considered:**
-- Comparative only — standard NLP methods paper comparing models on benchmarks
-- Descriptive only — documenting the performance gap without proposing a solution
+- Comparative only, standard NLP methods paper comparing models on benchmarks
+- Descriptive only, documenting the performance gap without proposing a solution
 
 **Why Comparative + Causal:**
-The comparative question alone produces a methods contribution. The causal question produces an impact contribution. Both are needed to justify HyDMIS's community-centered framing. A paper that only shows RemBERT + LDA + GPT-4 beats mBERT on aggregate F1 is not a paper about underrepresented communities — it's a methods paper that happens to mention them. Adding the causal component — community-stratified false positive rates as proxy for harm reduction — makes the community impact claim empirically grounded.
+The comparative question alone produces a methods contribution. The causal question produces an impact contribution. Both are needed to justify HyDMIS's community-centered framing. A paper that only shows RemBERT + LDA + GPT-4 beats mBERT on aggregate F1 is not a paper about underrepresented communities, it's a methods paper that happens to mention them. Adding the causal component, community-stratified false positive rates as proxy for harm reduction, makes the community impact claim empirically grounded.
 
 ---
 
-## Decision 2 — Three-Stage Hybrid Architecture
+## Decision 2, Three-Stage Hybrid Architecture
 
 **Decision:** LDA (Stage 1) → GPT-4 semantic verification (Stage 2) → RemBERT/mBERT/Mistral cross-lingual classification (Stage 3)
 
@@ -35,13 +35,13 @@ The comparative question alone produces a methods contribution. The causal quest
 - RAG-based verification: retrieval-augmented generation for evidence-based claim checking
 
 **Why three stages:**
-Single transformer requires labeled data in every target language — not available for genuinely low-resource community languages. Two-stage removes the semantic nuance that LLMs handle better than classifiers for code-switched and culturally-specific content. Four-stage adds complexity without a clear performance hypothesis. RAG-based verification is methodologically interesting but adds infrastructure requirements that make the pipeline impractical for community deployment — the stated goal.
+Single transformer requires labeled data in every target language, not available for genuinely low-resource community languages. Two-stage removes the semantic nuance that LLMs handle better than classifiers for code-switched and culturally-specific content. Four-stage adds complexity without a clear performance hypothesis. RAG-based verification is methodologically interesting but adds infrastructure requirements that make the pipeline impractical for community deployment, the stated goal.
 
 Three stages address exactly the three documented failure modes in existing systems with the minimum necessary complexity.
 
 ---
 
-## Decision 3 — LDA for Stage 1 Unsupervised Topic Modeling
+## Decision 3, LDA for Stage 1 Unsupervised Topic Modeling
 
 **Decision:** Use Latent Dirichlet Allocation for Stage 1 topic modeling, not neural topic models or LLM-based topic extraction.
 
@@ -52,15 +52,15 @@ Three stages address exactly the three documented failure modes in existing syst
 - No Stage 1: skip topic modeling, feed all content directly to Stage 2
 
 **Why LDA:**
-LDA works in genuinely zero-label settings — no training data required in the target language. BERTopic requires transformer embeddings which depend on pretraining quality for the target language. LLM zero-shot extraction works but doubles API costs for Stage 2. No Stage 1 means processing all 562K+ samples through GPT-4 — computationally and financially prohibitive.
+LDA works in genuinely zero-label settings, no training data required in the target language. BERTopic requires transformer embeddings which depend on pretraining quality for the target language. LLM zero-shot extraction works but doubles API costs for Stage 2. No Stage 1 means processing all 562K+ samples through GPT-4, computationally and financially prohibitive.
 
-LDA's short text limitation is real and acknowledged. Mitigation: minimum token filter before Stage 1, post-processing of incoherent clusters. The tradeoff — interpretable, language-agnostic, zero-label — justifies the limitation for this specific use case.
+LDA's short text limitation is real and acknowledged. Mitigation: minimum token filter before Stage 1, post-processing of incoherent clusters. The tradeoff, interpretable, language-agnostic, zero-label, justifies the limitation for this specific use case.
 
 **Uncertainty note:** BERTopic may outperform LDA for this specific application. Phase 4 runs a Stage 1 ablation comparing LDA vs BERTopic on a 10K sample before committing to LDA for full-scale evaluation.
 
 ---
 
-## Decision 4 — GPT-4 as Stage 2 Semantic Verifier
+## Decision 4, GPT-4 as Stage 2 Semantic Verifier
 
 **Decision:** Use GPT-4 as the primary semantic verification backbone for Stage 2, with Mistral 7B as the cost-efficient alternative for full-scale deployment.
 
@@ -71,15 +71,15 @@ LDA's short text limitation is real and acknowledged. Mitigation: minimum token 
 - No Stage 2: skip semantic verification, feed LDA output directly to Stage 3
 
 **Why GPT-4 + Mistral 7B hybrid:**
-GPT-4 produces the highest quality semantic verification — ClimateMiSt confirms GPT-4 outperforms all baseline models on both veracity and stance detection. But GPT-4 at 562K+ sample scale costs approximately $1,500-2,000. The practical solution: GPT-4 labels a representative 15K sample across all datasets and language groups, fine-tunes Mistral 7B on those labels, deploys Mistral 7B for full-scale verification. This reduces cost by approximately 95% while maintaining verification quality within acceptable bounds.
+GPT-4 produces the highest quality semantic verification, ClimateMiSt confirms GPT-4 outperforms all baseline models on both veracity and stance detection. But GPT-4 at 562K+ sample scale costs approximately $1,500-2,000. The practical solution: GPT-4 labels a representative 15K sample across all datasets and language groups, fine-tunes Mistral 7B on those labels, deploys Mistral 7B for full-scale verification. This reduces cost by approximately 95% while maintaining verification quality within acceptable bounds.
 
-No Stage 2 removes the nuance handling that differentiates HyDMIS from pure transformer classification — not viable given the research question.
+No Stage 2 removes the nuance handling that differentiates HyDMIS from pure transformer classification, not viable given the research question.
 
-**Uncertainty note:** GPT-4's generalization to genuinely low-resource languages — Tagalog, Haitian Creole, Swahili — is contested in the 2024-2025 literature. Phase 4 Week 1 runs a GPT-4 low-resource language ablation before any paper claim references GPT-4 verification quality on these languages. If GPT-4 fails on these languages, Stage 2 pivots to a multilingual fine-tuned model.
+**Uncertainty note:** GPT-4's generalization to genuinely low-resource languages, Tagalog, Haitian Creole, Swahili, is contested in the 2024-2025 literature. Phase 4 Week 1 runs a GPT-4 low-resource language ablation before any paper claim references GPT-4 verification quality on these languages. If GPT-4 fails on these languages, Stage 2 pivots to a multilingual fine-tuned model.
 
 ---
 
-## Decision 5 — RemBERT as Primary Stage 3 Backbone
+## Decision 5, RemBERT as Primary Stage 3 Backbone
 
 **Decision:** Use RemBERT as the primary cross-lingual classification backbone for Stage 3, with mBERT and Mistral 7B as comparison baselines.
 
@@ -90,13 +90,13 @@ No Stage 2 removes the nuance handling that differentiates HyDMIS from pure tran
 - Ensemble of all three: higher performance ceiling but obscures individual model contributions
 
 **Why RemBERT:**
-PolyTruth (2025) provides the clearest empirical evidence: RemBERT outperforms mBERT and XLM consistently on languages with under 10K training examples — exactly HyDMIS's target setting. RemBERT's decoupled input/output embeddings allow larger output representations without increasing input parameter count — architecturally suited for low-resource transfer.
+PolyTruth (2025) provides the clearest empirical evidence: RemBERT outperforms mBERT and XLM consistently on languages with under 10K training examples, exactly HyDMIS's target setting. RemBERT's decoupled input/output embeddings allow larger output representations without increasing input parameter count, architecturally suited for low-resource transfer.
 
-All three backbones (mBERT, RemBERT, Mistral 7B) are evaluated in Phase 4 ablations. RemBERT is the primary — not the only — backbone. Results are reported separately by language resource level (high/medium/low) so the comparison is honest.
+All three backbones (mBERT, RemBERT, Mistral 7B) are evaluated in Phase 4 ablations. RemBERT is the primary, not the only, backbone. Results are reported separately by language resource level (high/medium/low) so the comparison is honest.
 
 ---
 
-## Decision 6 — Community-Weighted Loss Function
+## Decision 6, Community-Weighted Loss Function
 
 **Decision:** Apply community-weighted loss in Stage 3 training, assigning higher weights to underrepresented language community examples.
 
@@ -107,7 +107,7 @@ All three backbones (mBERT, RemBERT, Mistral 7B) are evaluated in Phase 4 ablati
 - Oversampling: repeat low-resource examples to balance training distribution
 
 **Why community-weighted loss:**
-Data augmentation introduces synthetic examples that inherit generation model biases — real examples are always preferable. Curriculum learning requires careful scheduling that adds implementation complexity without a clear advantage over weighted loss. Oversampling risks overfitting on repeated low-resource examples.
+Data augmentation introduces synthetic examples that inherit generation model biases, real examples are always preferable. Curriculum learning requires careful scheduling that adds implementation complexity without a clear advantage over weighted loss. Oversampling risks overfitting on repeated low-resource examples.
 
 Community-weighted loss is the most direct intervention: it changes what the model optimizes, not just what data it sees. The weight magnitudes are determined empirically in Phase 4 based on actual class imbalance in the training data.
 
@@ -115,7 +115,7 @@ Community-weighted loss is the most direct intervention: it changes what the mod
 
 ---
 
-## Decision 7 — 9 Datasets Across 6 Domains
+## Decision 7, 9 Datasets Across 6 Domains
 
 **Decision:** Use 9 datasets covering political, news, health, social media, South Asian, and climate domains totaling 562K+ samples across 15+ languages.
 
@@ -126,19 +126,19 @@ Community-weighted loss is the most direct intervention: it changes what the mod
 - Add both MMCFND and ClimateMiSt: 9 datasets (chosen)
 
 **Why add MMCFND:**
-Seven Indic languages covering South Asian diaspora communities — the most significant low-resource language gap in the original 7 datasets. South Asian communities in the US are primary targets of health and civic participation disinformation. No other dataset in the corpus covers this language family.
+Seven Indic languages covering South Asian diaspora communities, the most significant low-resource language gap in the original 7 datasets. South Asian communities in the US are primary targets of health and civic participation disinformation. No other dataset in the corpus covers this language family.
 
 **Why add ClimateMiSt:**
-146,670 tweets with veracity and stance annotations — largest climate disinformation dataset with this annotation depth. Co-authored by Dong Wang (UIUC iSchool target faculty). ClimateMiSt's GPT-4 finding directly validates HyDMIS Stage 2 design. Climate and agricultural disinformation are thematically connected to HyDMIS's community targeting framing.
+146,670 tweets with veracity and stance annotations, largest climate disinformation dataset with this annotation depth. Co-authored by Dong Wang (UIUC iSchool target faculty). ClimateMiSt's GPT-4 finding directly validates HyDMIS Stage 2 design. Climate and agricultural disinformation are thematically connected to HyDMIS's community targeting framing.
 
 **Why stop at 9:**
 562K+ samples across 15+ languages and 6 domains is the most comprehensive multilingual disinformation evaluation corpus assembled for a single paper. Additional datasets add diminishing returns and increase Phase 4 compute requirements without strengthening the research claim.
 
-**Status note (Jun 2026):** MultiClaim is pending Zenodo access. ClimateMiSt is pending Dong Wang email response. Both are expected before Phase 4 Stage 2 begins. If either remains unavailable, the corpus falls to 7 confirmed datasets — still sufficient for the cross-domain claim.
+**Status note (Jun 2026):** MultiClaim is pending Zenodo access. ClimateMiSt is pending Dong Wang email response. Both are expected before Phase 4 Stage 2 begins. If either remains unavailable, the corpus falls to 7 confirmed datasets, still sufficient for the cross-domain claim.
 
 ---
 
-## Decision 8 — Evaluation by Language Resource Level
+## Decision 8, Evaluation by Language Resource Level
 
 **Decision:** Report all results stratified by language resource level (high/medium/low) rather than aggregate multilingual F1 only.
 
@@ -148,13 +148,13 @@ Seven Indic languages covering South Asian diaspora communities — the most sig
 - Per-domain reporting: captures domain variation but obscures community-level performance
 
 **Why language resource stratification:**
-PolyTruth (2025) established this as the right evaluation methodology for low-resource multilingual work. Aggregate F1 hides the performance gaps HyDMIS is specifically designed to address. A system that achieves 91% on English and 61% on Tagalog reports 76% aggregate — which looks acceptable. Stratified reporting exposes the 30-point gap. Reviewers who know the field will expect stratified results. Providing only aggregate numbers would be a methodological red flag.
+PolyTruth (2025) established this as the right evaluation methodology for low-resource multilingual work. Aggregate F1 hides the performance gaps HyDMIS is specifically designed to address. A system that achieves 91% on English and 61% on Tagalog reports 76% aggregate, which looks acceptable. Stratified reporting exposes the 30-point gap. Reviewers who know the field will expect stratified results. Providing only aggregate numbers would be a methodological red flag.
 
-**Phase 4 EDA validation (Jun 2026):** TruthSeeker EDA confirmed the NO MAJORITY annotation class (16.8% of data, 49.0% dis rate) — validates stratified evaluation. FakeNewsNet EDA confirmed no-URL posts have 78.8% disinformation rate — validates metadata feature inclusion in Stage 2 semantic verification.
+**Phase 4 EDA validation (Jun 2026):** TruthSeeker EDA confirmed the NO MAJORITY annotation class (16.8% of data, 49.0% dis rate), validates stratified evaluation. FakeNewsNet EDA confirmed no-URL posts have 78.8% disinformation rate, validates metadata feature inclusion in Stage 2 semantic verification.
 
 ---
 
-## Decision 9 — EMNLP 2027 as Target Venue
+## Decision 9, EMNLP 2027 as Target Venue
 
 **Decision:** Submit to EMNLP 2027 via ACL Rolling Review (~May 2027), with arXiv preprint uploaded December 2026.
 
@@ -165,7 +165,7 @@ PolyTruth (2025) established this as the right evaluation methodology for low-re
 - COLING 2026: strong multilingual NLP track
 
 **Why EMNLP 2027:**
-EMNLP 2026 ARR submission deadline was May 25, 2026 — missed. NAACL 2027 ARR deadline is approximately October 2026 — before HyDMIS paper writing begins. ACL 2027 ARR deadline is approximately February 2027 — possible but tight. EMNLP 2027 ARR deadline approximately May 2027 gives sufficient time to write, revise, and polish a strong paper after December 2026 manuscript completion. EMNLP is the strongest venue for empirical multilingual NLP — submitting to ACL first and falling back to EMNLP is the alternative if ACL 2027 deadline is confirmed achievable.
+EMNLP 2026 ARR submission deadline was May 25, 2026, missed. NAACL 2027 ARR deadline is approximately October 2026, before HyDMIS paper writing begins. ACL 2027 ARR deadline is approximately February 2027, possible but tight. EMNLP 2027 ARR deadline approximately May 2027 gives sufficient time to write, revise, and polish a strong paper after December 2026 manuscript completion. EMNLP is the strongest venue for empirical multilingual NLP, submitting to ACL first and falling back to EMNLP is the alternative if ACL 2027 deadline is confirmed achievable.
 
 **arXiv preprint December 2026:** Posted after manuscript complete. Establishes priority and provides a citable preprint for PhD application materials even though no venue has accepted the paper at that point.
 
@@ -173,7 +173,7 @@ EMNLP 2026 ARR submission deadline was May 25, 2026 — missed. NAACL 2027 ARR d
 
 ---
 
-## Decision 10 — Kim et al. Covid-vaccine-misinfo-MIC Venue
+## Decision 10, Kim et al. Covid-vaccine-misinfo-MIC Venue
 
 **Decision:** Confirmed. Use this dataset with the correct citation.
 
@@ -183,19 +183,19 @@ Venue confirmed as EMNLP 2023 main conference. Literature docs updated before Ph
 
 ---
 
-## Open Decisions — Not Yet Resolved
+## Open Decisions, Not Yet Resolved
 
-**Open 1 — LDA topic count:**
+**Open 1, LDA topic count:**
 Optimal number of topics for Stage 1 across 6 domains and 15+ languages. Standard range is 20-100. Phase 4 ablation determines this empirically before fixing the parameter.
 
-**Open 2 — GPT-4 sample size for Stage 2 fine-tuning:**
+**Open 2, GPT-4 sample size for Stage 2 fine-tuning:**
 How many GPT-4-labeled examples are needed to fine-tune Mistral 7B to acceptable quality? 10K? 15K? 25K? This determines cost and quality tradeoff. Phase 4 Week 1 experiments determine this.
 
-**Open 3 — Community weight magnitudes:**
-Exact weight values for underrepresented language communities in the loss function. Depends on actual class imbalance in training data — determined empirically in Phase 4.
+**Open 3, Community weight magnitudes:**
+Exact weight values for underrepresented language communities in the loss function. Depends on actual class imbalance in training data, determined empirically in Phase 4.
 
-**Open 4 — False positive rate as harm reduction proxy:**
-Is community-stratified false positive rate a sufficient proxy for deployment-time harm reduction? Or do we need additional evidence? The causal claim in the research question requires careful framing — overreach here is the most likely reviewer objection to the paper's contribution claim.
+**Open 4, False positive rate as harm reduction proxy:**
+Is community-stratified false positive rate a sufficient proxy for deployment-time harm reduction? Or do we need additional evidence? The causal claim in the research question requires careful framing, overreach here is the most likely reviewer objection to the paper's contribution claim.
 
 ---
 
@@ -203,7 +203,7 @@ Is community-stratified false positive rate a sufficient proxy for deployment-ti
 
 All references as listed in literature_review.md and literature_analysis.md.
 
-## Decision 11 — GPT-4 Verified Sample Cannot Be Retroactively Joined to Real LDA Topic Assignments; Stage 2 Ablation Blocked Until Re-Sampling
+## Decision 11, GPT-4 Verified Sample Cannot Be Retroactively Joined to Real LDA Topic Assignments; Stage 2 Ablation Blocked Until Re-Sampling
 
 **Investigation (Aug 3 2026):** After fixing lda_pipeline.py to finally persist real topic assignments to data/processed/lda_topic_assignments.csv (177,074 records, previously never saved -- see commit history), attempted to join this against the completed gpt4_verified.csv (14,640 records) to build a Stage 2 ablation comparing LDA-topic-alone veracity discrimination against GPT-4-verified labels on the same records.
 
@@ -217,7 +217,7 @@ All references as listed in literature_review.md and literature_analysis.md.
 
 **Required before re-sampling can proceed:** Update gpt4_sampler.py to preserve original DataFrame index (or an explicit id column) through both the pd.concat and the shuffle/reset_index step, mirroring the fix already applied to lda_pipeline.py, so this traceability gap does not recur.
 
-## Decision 12 — Stage 2 Ablation Result: GPT-4 Verification Adds Real Discriminative Value Over LDA Alone
+## Decision 12, Stage 2 Ablation Result: GPT-4 Verification Adds Real Discriminative Value Over LDA Alone
 
 **Result (Aug 3 2026):** Using the 11,294 records with both a real LDA topic and a GPT-4 veracity label (see Decision 11 for how this joined dataset was built), quantified whether LDA topic alone meaningfully predicts veracity. Method: for each of the 10 English LDA topics, computed the majority GPT-4 label's share of records in that topic, then averaged across topics.
 
@@ -227,7 +227,7 @@ All references as listed in literature_review.md and literature_analysis.md.
 
 **Caveat for the paper:** This ablation only covers 77.1% of the full verified sample (11,294/14,640), due to the LDA subsampling gap documented in Decision 11. The 4 topics computed on the full LIAR2/FakeNewsNet/NewsPolyML datasets (near-100% coverage) are more reliable than the TruthSeeker/DeFaktS-derived topics (which only cover ~45% of those datasets' GPT-4-verified records). This partial coverage should be stated explicitly if this ablation is reported in the paper.
 
-## Decision 13 — Stage 3 mBERT Training Target: gpt4_label, Not veracity
+## Decision 13, Stage 3 mBERT Training Target: gpt4_label, Not veracity
 
 **Investigation (Aug 4 2026):** Before building Stage 3 mBERT classification setup, checked the joined dataset (gpt4_verified_with_lda.csv, 14,640 records) for the correct training label column. Two candidates exist: veracity (the original per-dataset label) and gpt4_label (Stage 2's GPT-4 semantic verification output, YES/NO/UNCERTAIN/PARTIAL).
 
@@ -237,7 +237,7 @@ All references as listed in literature_review.md and literature_analysis.md.
 
 **Scope note:** Decision 3 (Phase 4 plan) specifies GPT-4 labels a 15K sample, Mistral 7B is fine-tuned on those labels, then Mistral 7B labels the full 562K+ dataset for full-scale Stage 3 training. That Mistral-7B pseudo-labeling step has not been built yet (scheduled later in August per the tracker). Today's Stage 3 setup uses only the 14,640 directly GPT-4-labeled records as a working prototype to build and validate the classification pipeline architecture -- full-scale training on the 562K+ dataset is correctly deferred until the Mistral-7B labeling step exists.
 
-## Decision 14 — Exclude Single PARTIAL Record from Stage 3 Prototype Training; Train 3-Class (YES/NO/UNCERTAIN)
+## Decision 14, Exclude Single PARTIAL Record from Stage 3 Prototype Training; Train 3-Class (YES/NO/UNCERTAIN)
 
 **Finding:** The 14,640-record GPT-4-labeled dataset has exactly 1 PARTIAL record (verified manually earlier as a genuine partially-true German political fact-check, not a data error). A single example cannot be split across train/val/test or evaluated with any per-class metric.
 
