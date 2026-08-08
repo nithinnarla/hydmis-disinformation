@@ -1,10 +1,10 @@
 """
-HyDMIS — FakeNewsNet Dataset Loader
+HyDMIS, FakeNewsNet Dataset Loader
 Hybrid Disinformation Identification System
 
-FakeNewsNet — 23,196 news articles (Shu et al., 2020)
+FakeNewsNet, 23,196 news articles (Shu et al., 2020)
 PolitiFact and GossipCop political and celebrity news.
-Content features only — English baseline news dataset.
+Content features only, English baseline news dataset.
 """
 
 import pandas as pd
@@ -15,10 +15,10 @@ DATA_DIR = 'data/raw'
 
 def load_fakenewsnet(data_dir: str = DATA_DIR) -> dict:
     """
-    Load FakeNewsNet — political and celebrity news.
+    Load FakeNewsNet, political and celebrity news.
     Source: Shu et al. (2020) Big Data
     23,196 records across PolitiFact and GossipCop sources.
-    Content features only — social graph not available for
+    Content features only, social graph not available for
     low-resource community content so excluded by design.
     """
     path = os.path.join(data_dir, 'fakenewsnet')
@@ -37,7 +37,7 @@ def load_fakenewsnet(data_dir: str = DATA_DIR) -> dict:
         dfs.append(df)
 
     combined = pd.concat(dfs, ignore_index=True)
-    print(f"  ✓ FakeNewsNet: {len(combined):,} records | News | English")
+    print(f"   FakeNewsNet: {len(combined):,} records | News | English")
 
     return {
         'name': 'fakenewsnet',

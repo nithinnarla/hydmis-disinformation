@@ -1,9 +1,9 @@
 """
-HyDMIS — LIAR2 Dataset Loader
+HyDMIS, LIAR2 Dataset Loader
 Hybrid Disinformation Identification System
 
-LIAR2 — 22,962 political claims (Xu & Kechadi, 2024)
-Updated LIAR benchmark — PolitiFact statements with six-way veracity labels.
+LIAR2, 22,962 political claims (Xu & Kechadi, 2024)
+Updated LIAR benchmark, PolitiFact statements with six-way veracity labels.
 Used as English baseline for political disinformation detection.
 """
 
@@ -15,11 +15,11 @@ DATA_DIR = 'data/raw'
 
 def load_liar2(data_dir: str = DATA_DIR) -> dict:
     """
-    Load LIAR2 dataset — political claim fact-checking.
-    Source: Xu & Kechadi (2024) — updated LIAR benchmark
+    Load LIAR2 dataset, political claim fact-checking.
+    Source: Xu & Kechadi (2024), updated LIAR benchmark
     22,962 PolitiFact statements with six-way veracity labels.
     Used as English baseline for political disinformation detection.
-    HyDMIS uses LIAR2 (not original LIAR) — larger and more recent.
+    HyDMIS uses LIAR2 (not original LIAR), larger and more recent.
     """
     path = os.path.join(data_dir, 'liar')
     print("Loading LIAR2...")
@@ -33,7 +33,7 @@ def load_liar2(data_dir: str = DATA_DIR) -> dict:
             dfs.append(df)
 
     combined = pd.concat(dfs, ignore_index=True)
-    print(f"  ✓ LIAR2: {len(combined):,} records | Political | English")
+    print(f"   LIAR2: {len(combined):,} records | Political | English")
 
     return {
         'name': 'liar2',

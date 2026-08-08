@@ -1,9 +1,9 @@
 """
-HyDMIS — TruthSeeker EDA
-Phase 4 — Exploratory Data Analysis
+HyDMIS, TruthSeeker EDA
+Phase 4, Exploratory Data Analysis
 Social Media Disinformation Domain
 
-EDA on TruthSeeker dataset — 134,198 social media posts (Dadkhah et al., 2023).
+EDA on TruthSeeker dataset, 134,198 social media posts (Dadkhah et al., 2023).
 Largest labeled social media fake news dataset in existence.
 Primary English social media benchmark for HyDMIS.
 
@@ -32,7 +32,7 @@ THREE_LABELS = ["Agree","Disagree"]
 
 
 def run_eda():
-    print("HyDMIS Phase 4 — TruthSeeker EDA")
+    print("HyDMIS Phase 4, TruthSeeker EDA")
     print("=" * 50)
 
     result = load_truthseeker()
@@ -49,7 +49,7 @@ def run_eda():
     disinfo = (df["BinaryNumTarget"]==0).sum()
     print(f"  Credible (1):        {credible:,} ({credible/len(df):.1%})")
     print(f"  Disinformation (0):  {disinfo:,} ({disinfo/len(df):.1%})")
-    print(f"  Note: Nearly balanced — 51.4% credible vs 48.6% disinformation")
+    print(f"  Note: Nearly balanced, 51.4% credible vs 48.6% disinformation")
     print(f"  Note: binary_label flipped for HyDMIS consistency: 1=disinformation")
 
     print(f"\n--- Five-Way Label Distribution ---")
@@ -57,7 +57,7 @@ def run_eda():
     for label in FIVE_LABELS:
         count = five_counts.get(label, 0)
         print(f"  {label:<20} {count:,} ({count/len(df):.1%})")
-    print(f"  Note: NO MAJORITY (16.8%) — ambiguous crowd annotation cases")
+    print(f"  Note: NO MAJORITY (16.8%), ambiguous crowd annotation cases")
 
     print(f"\n--- Three-Way Label Distribution ---")
     three_counts = df["3_label_majority_answer"].value_counts()
@@ -129,7 +129,7 @@ def run_eda():
     print(f"  Top 10 Credible keywords:")
     for kw, cnt in cred_kw.value_counts().head(10).items():
         print(f"    {str(kw):<30} n={cnt:,}")
-    print(f"  Note: Disinformation — COVID/election topics; Credible — policy debates")
+    print(f"  Note: Disinformation, COVID/election topics; Credible, policy debates")
 
 
     print(f"\n--- NO MAJORITY Analysis ---")
@@ -138,13 +138,13 @@ def run_eda():
     print(f"  NO MAJORITY records: {len(no_maj):,} ({len(no_maj)/len(df):.1%})")
     print(f"  NO MAJORITY dis rate: {no_maj['binary_label'].mean():.1%}")
     print(f"  Has majority dis rate: {has_maj['binary_label'].mean():.1%}")
-    print(f"  Note: NO MAJORITY cases ambiguous — special handling needed in HyDMIS Stage 1")
+    print(f"  Note: NO MAJORITY cases ambiguous, special handling needed in HyDMIS Stage 1")
 
     print(f"\n--- Key Observations ---")
     print(f"  Total records: {len(df):,}")
     print(f"  Binary disinformation rate: {df['binary_label'].mean():.1%}")
-    print(f"  Near-balanced dataset — no severe class imbalance")
-    print(f"  Dual-text structure: statement + tweet response — unique to TruthSeeker")
+    print(f"  Near-balanced dataset, no severe class imbalance")
+    print(f"  Dual-text structure: statement + tweet response, unique to TruthSeeker")
     print(f"  NO MAJORITY cases (16.8%) require careful handling in HyDMIS Stage 1")
     print(f"  Author signal: fact-checker identity may encode credibility bias")
 

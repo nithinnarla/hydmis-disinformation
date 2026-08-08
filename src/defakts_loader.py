@@ -1,8 +1,8 @@
 """
-HyDMIS — DeFaktS Dataset Loader
+HyDMIS, DeFaktS Dataset Loader
 Hybrid Disinformation Identification System
 
-DeFaktS — 105,855 German Twitter posts (Ashraf et al., 2024)
+DeFaktS, 105,855 German Twitter posts (Ashraf et al., 2024)
 Fine-grained disinformation annotations across elections, climate, health.
 Primary German-language social media dataset for HyDMIS.
 """
@@ -16,7 +16,7 @@ DATA_DIR = 'data/raw'
 
 def load_defakts(data_dir: str = DATA_DIR) -> dict:
     """
-    Load DeFaktS — German Twitter disinformation.
+    Load DeFaktS, German Twitter disinformation.
     Source: Ashraf et al. (2024) LREC-COLING
     105,855 German Twitter/X posts with fine-grained
     disinformation annotations across elections, climate,
@@ -31,7 +31,7 @@ def load_defakts(data_dir: str = DATA_DIR) -> dict:
             records.append(json.loads(line.strip()))
 
     df = pd.DataFrame(records)
-    print(f"  ✓ DeFaktS: {len(df):,} records | Social Media | German")
+    print(f"   DeFaktS: {len(df):,} records | Social Media | German")
 
     return {
         'name': 'defakts',

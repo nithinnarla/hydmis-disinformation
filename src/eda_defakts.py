@@ -1,20 +1,20 @@
 """
-HyDMIS — DeFaktS EDA
-Phase 4 — Exploratory Data Analysis
+HyDMIS, DeFaktS EDA
+Phase 4, Exploratory Data Analysis
 German Social Media Disinformation Domain
 
-EDA on DeFaktS — 105,855 German Twitter posts (Ashraf et al., 2024).
+EDA on DeFaktS, 105,855 German Twitter posts (Ashraf et al., 2024).
 Source: LREC-COLING 2024
 Fine-grained disinformation annotations across elections, climate, health.
 Primary German-language social media dataset for HyDMIS.
 
-Key finding: 81.1% unlabeled for binary classification — span labels
+Key finding: 81.1% unlabeled for binary classification, span labels
 are the primary annotation (86.3% coverage). HyDMIS uses span-level
 disinformation detection, not binary classification.
 
-Label: binary_label (1=disinformation, 0=credible) — only 18.9% labeled
+Label: binary_label (1=disinformation, 0=credible), only 18.9% labeled
 Span labels: fine-grained token-level annotations (86.3% coverage)
-Language: German (de) — 100%
+Language: German (de), 100%
 """
 
 import pandas as pd
@@ -29,7 +29,7 @@ from defakts_loader import load_defakts
 
 
 def run_eda():
-    print("HyDMIS Phase 4 — DeFaktS EDA")
+    print("HyDMIS Phase 4, DeFaktS EDA")
     print("=" * 50)
 
     result = load_defakts()
@@ -46,11 +46,11 @@ def run_eda():
 
     print(f"\n--- Dataset Overview ---")
     print(f"  Total records:     {len(df):,}")
-    print(f"  Language:          German (de) — 100%")
+    print(f"  Language:          German (de), 100%")
     print(f"  Date range:        2008-2023 (15 years)")
     print(f"  Binary labeled:    {df['binary_label'].notna().sum():,} ({df['binary_label'].notna().mean():.1%})")
     print(f"  Span labeled:      {df['has_span'].sum():,} ({df['has_span'].mean():.1%})")
-    print(f"  Note: Span labels are primary annotation — binary label only 18.9% coverage")
+    print(f"  Note: Span labels are primary annotation, binary label only 18.9% coverage")
 
     print(f"\n--- Binary Label Distribution ---")
     labeled = df[df['binary_label'].notna()]
@@ -59,7 +59,7 @@ def run_eda():
     print(f"  Disinformation (1): {dis:,} ({dis/len(labeled):.1%})")
     print(f"  Credible (0):       {cred:,} ({cred/len(labeled):.1%})")
     print(f"  Unlabeled:          {df['binary_label'].isna().sum():,} ({df['binary_label'].isna().mean():.1%})")
-    print(f"  Note: Among labeled records, disinformation={dis/len(labeled):.1%} — class imbalance")
+    print(f"  Note: Among labeled records, disinformation={dis/len(labeled):.1%}, class imbalance")
     print(f"  HyDMIS uses span-level detection for unlabeled records")
 
     print(f"\n--- Span Label Types ---")
@@ -73,15 +73,15 @@ def run_eda():
     print(f"  Total span annotations: {len(all_labels):,}")
     for label, count in label_counts.most_common(15):
         print(f"  {label:<20} {count:,} ({count/len(all_labels):.1%})")
-    print(f"  Note: corpkeyword dominates — corporate keyword markers")
-    print(f"  catposfake={label_counts.get('catposfake',0):,} — positive fake category — primary disinformation signal")
+    print(f"  Note: corpkeyword dominates, corporate keyword markers")
+    print(f"  catposfake={label_counts.get('catposfake',0):,}, positive fake category, primary disinformation signal")
 
     print(f"\n--- Span Coverage ---")
     print(f"  Records with span labels: {df['has_span'].sum():,} ({df['has_span'].mean():.1%})")
     print(f"  Records without spans:    {(~df['has_span']).sum():,} ({(~df['has_span']).mean():.1%})")
     print(f"  Mean spans per record:    {df['span_count'].mean():.1f}")
     print(f"  Max spans per record:     {df['span_count'].max()}")
-    print(f"  Note: 86.3% span coverage — richer than binary label (18.9%)")
+    print(f"  Note: 86.3% span coverage, richer than binary label (18.9%)")
 
     print(f"\n--- Text Length Distribution ---")
     print(f"  Mean: {df['text_len'].mean():.0f} chars | Median: {df['text_len'].median():.0f}")
@@ -95,7 +95,7 @@ def run_eda():
     print(f"\n--- Engagement Metrics ---")
     for col in ['LikeCount','RetweetCount','ReplyCount','QuoteCount']:
         print(f"  {col:<15} mean={df[col].mean():.1f} | median={df[col].median():.0f} | max={df[col].max():,}")
-    print(f"  Note: Median engagement=0-1 — heavily right-skewed; viral outliers dominate mean")
+    print(f"  Note: Median engagement=0-1, heavily right-skewed; viral outliers dominate mean")
 
     print(f"\n--- Engagement by Label ---")
     for label, name in [(1,'Disinformation'),(0,'Credible')]:
@@ -111,7 +111,7 @@ def run_eda():
         count = year_counts.get(year, 0)
         print(f"  {year}: {count:,}")
     recent = df[df['year']>=2019]['year'].notna().sum()
-    print(f"  Records 2019+: {recent:,} ({recent/len(df):.1%}) — post-COVID era")
+    print(f"  Records 2019+: {recent:,} ({recent/len(df):.1%}), post-COVID era")
 
     print(f"\n--- Hashtag Analysis ---")
     has_hashtag = df['Hashtags'].notna()
@@ -138,7 +138,7 @@ def run_eda():
         total = sum(label_span_counts[label].values())
         for span_type, count in top:
             print(f"    {span_type:<20} {count:,} ({count/total:.1%})")
-    print(f"  Note: catposfake higher in disinformation — primary span-level signal for HyDMIS")
+    print(f"  Note: catposfake higher in disinformation, primary span-level signal for HyDMIS")
 
 
     print(f"\n--- Engagement Statistical Tests (Mann-Whitney U) ---")
@@ -150,8 +150,8 @@ def run_eda():
         stat, pval = stats.mannwhitneyu(dis_mw[col], cred_mw[col], alternative="two-sided")
         sig = "SIGNIFICANT" if pval < 0.05 else "not significant"
         print(f"  {col:<15} U={stat:.0f} p={pval:.4f} {sig}")
-    print(f"  Note: LikeCount p=0.0007, ReplyCount p=0.0001 — disinformation virality statistically confirmed")
-    print(f"  RetweetCount p=0.5623 — retweet difference not statistically significant")
+    print(f"  Note: LikeCount p=0.0007, ReplyCount p=0.0001, disinformation virality statistically confirmed")
+    print(f"  RetweetCount p=0.5623, retweet difference not statistically significant")
 
     print(f"\n--- Missing Values ---")
     key_cols = ['text','binary_label','span_labels','Language','DateTime','LikeCount']
@@ -161,10 +161,10 @@ def run_eda():
 
     print(f"\n--- Key Observations ---")
     print(f"  Total: {len(df):,} German tweets across 15 years (2008-2023)")
-    print(f"  Binary label: only 18.9% coverage — span labels are primary annotation")
-    print(f"  Span coverage: 86.3% — catposfake={label_counts.get('catposfake',0):,} disinformation spans")
-    print(f"  corpkeyword dominates spans — corporate keyword detection primary signal")
-    print(f"  Engagement heavily skewed — median=0-1, mean=22 due to viral outliers")
+    print(f"  Binary label: only 18.9% coverage, span labels are primary annotation")
+    print(f"  Span coverage: 86.3%, catposfake={label_counts.get('catposfake',0):,} disinformation spans")
+    print(f"  corpkeyword dominates spans, corporate keyword detection primary signal")
+    print(f"  Engagement heavily skewed, median=0-1, mean=22 due to viral outliers")
     print(f"  HyDMIS uses DeFaktS for German fine-grained span-level disinformation detection")
 
     print(f"\n--- DeFaktS EDA complete ---")

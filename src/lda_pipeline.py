@@ -1,6 +1,6 @@
 """
-HyDMIS — LDA Topic Modeling Pipeline
-Phase 4 — Stage 1: Unsupervised Topic Modeling
+HyDMIS, LDA Topic Modeling Pipeline
+Phase 4, Stage 1: Unsupervised Topic Modeling
 
 Latent Dirichlet Allocation across HyDMIS multilingual social media content.
 Identifies latent topic clusters without requiring labels.
@@ -121,7 +121,7 @@ def assign_topics(lda, vectorizer, texts):
 
 
 def run_pipeline():
-    print("HyDMIS Phase 4 — Stage 1: LDA Topic Modeling Pipeline")
+    print("HyDMIS Phase 4, Stage 1: LDA Topic Modeling Pipeline")
     print("=" * 58)
 
     # Load datasets
@@ -246,8 +246,8 @@ def run_pipeline():
     print(f"  German corpus: {len(de_texts):,} texts | {N_TOPICS_GERMAN} topics identified")
     print(f"  Multilingual corpus: {len(npm_texts):,} texts | {N_TOPICS_MULTILINGUAL} topics identified")
     print(f"  LDA separates health, political, and social disinformation clusters unsupervised")
-    print(f"  German LDA separate model — textstat FK confirmed unusable for German")
-    print(f"  Stage 1 complete — topic assignments ready for Stage 2 GPT-4 verification")
+    print(f"  German LDA separate model, textstat FK confirmed unusable for German")
+    print(f"  Stage 1 complete, topic assignments ready for Stage 2 GPT-4 verification")
 
     print(f"\n--- Saving Topic Assignments ---")
     assignments_records = []
@@ -269,7 +269,7 @@ def run_pipeline():
 
     print(f"\n--- LDA Pipeline complete ---")
     print(f"  3 LDA models trained: English, German, Multilingual")
-    print(f"  Ready for lda_train.py — hyperparameter optimization and topic coherence scoring")
+    print(f"  Ready for lda_train.py, hyperparameter optimization and topic coherence scoring")
 
     return en_lda, en_vec, de_lda, de_vec, multi_lda, multi_vec
 

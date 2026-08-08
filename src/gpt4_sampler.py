@@ -1,6 +1,6 @@
 """
-HyDMIS — GPT-4 Semantic Verification Sampler
-Phase 4 — Stage 2: GPT-4 Semantic Verification Setup
+HyDMIS, GPT-4 Semantic Verification Sampler
+Phase 4, Stage 2: GPT-4 Semantic Verification Setup
 
 Builds stratified 15K sample across all 5 HyDMIS datasets and language groups
 for GPT-4 semantic verification of LDA topic assignments.
@@ -18,10 +18,10 @@ Column mapping (verified against loaders):
 - NewsPolyML:  text=article_description, label=normalized_label, language=article_language
 
 Output:
-- data/processed/gpt4_sample.csv — 15K stratified sample with prompts
-- data/processed/gpt4_sample_stats.csv — sample statistics
+- data/processed/gpt4_sample.csv, 15K stratified sample with prompts
+- data/processed/gpt4_sample_stats.csv, sample statistics
 
-Script type: pipeline/infrastructure — no notebook, no figures
+Script type: pipeline/infrastructure, no notebook, no figures
 """
 
 import os
@@ -157,7 +157,7 @@ def load_and_sample_newspolyml(n):
 
 
 def run_gpt4_sampler():
-    print("HyDMIS Phase 4 — Stage 2: GPT-4 Semantic Verification Sampler")
+    print("HyDMIS Phase 4, Stage 2: GPT-4 Semantic Verification Sampler")
     print("=" * 65)
     print(f"  Target sample: {TOTAL_SAMPLE:,} records across 5 datasets")
 
@@ -177,7 +177,7 @@ def run_gpt4_sampler():
             df = loader_fn(n)
             frames.append(df)
         except Exception as e:
-            print(f"  WARNING: {name} failed — {e}")
+            print(f"  WARNING: {name} failed, {e}")
 
     if not frames:
         print("ERROR: No datasets loaded successfully")
@@ -219,8 +219,8 @@ def run_gpt4_sampler():
 
     print(f"\n--- GPT-4 Sampler complete ---")
     print(f"  {len(sample):,} records ready for GPT-4 verification")
-    print(f"  Prompts built — awaiting GPT-4 API integration (Jul 28)")
-    print(f"  LDA topic assignments pending — run lda_pipeline first")
+    print(f"  Prompts built, awaiting GPT-4 API integration (Jul 28)")
+    print(f"  LDA topic assignments pending, run lda_pipeline first")
     cost_low = len(sample) * 0.0002
     cost_high = len(sample) * 0.0003
     print(f"  Cost estimate: ~${cost_low:.0f}-${cost_high:.0f} at GPT-4 rates")

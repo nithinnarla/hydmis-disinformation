@@ -1,6 +1,6 @@
 """
-HyDMIS — GPT-4 Semantic Verification Engine
-Phase 4 — Stage 2: GPT-4 Semantic Verification
+HyDMIS, GPT-4 Semantic Verification Engine
+Phase 4, Stage 2: GPT-4 Semantic Verification
 
 Calls GPT-4 API on stratified 14,640-record sample to:
 1. Verify whether each claim is disinformation (YES/NO/UNCERTAIN)
@@ -10,14 +10,14 @@ Calls GPT-4 API on stratified 14,640-record sample to:
 Architecture (Decision 4):
 - GPT-4 labels 14,640 representative samples
 - Labels used to fine-tune Mistral 7B for full-scale deployment
-- Batch processing with rate limiting — 50 requests/minute
-- Checkpoint saves every 500 records — resumable on failure
+- Batch processing with rate limiting, 50 requests/minute
+- Checkpoint saves every 500 records, resumable on failure
 - Cost estimate: ~$3-$4 at GPT-4o-mini rates
 
 Input: data/processed/gpt4_sample.csv (from gpt4_sampler.py)
-Output: data/processed/gpt4_verified.csv — sample with GPT-4 labels
+Output: data/processed/gpt4_verified.csv, sample with GPT-4 labels
 
-Script type: pipeline/infrastructure — no notebook, no figures
+Script type: pipeline/infrastructure, no notebook, no figures
 """
 
 import os
@@ -38,8 +38,8 @@ OUTPUT_PATH = os.path.join(PROCESSED_DIR, 'gpt4_verified.csv')
 CHECKPOINT_PATH = os.path.join(PROCESSED_DIR, 'gpt4_checkpoint.csv')
 
 MODEL = 'gpt-4o-mini'  # cost-efficient; GPT-4 quality for classification tasks
-BATCH_SIZE = 1          # one request per record — simpler error handling
-RATE_LIMIT_SLEEP = 1.2  # seconds between requests — 50 req/min limit
+BATCH_SIZE = 1          # one request per record, simpler error handling
+RATE_LIMIT_SLEEP = 1.2  # seconds between requests, 50 req/min limit
 CHECKPOINT_EVERY = 500  # save checkpoint every N records
 MAX_RETRIES = 3
 TIMEOUT = 30
@@ -103,7 +103,7 @@ def verify_single(client, prompt, retries=MAX_RETRIES):
                     {'role': 'user', 'content': prompt}
                 ],
                 max_tokens=100,
-                temperature=0.0,  # deterministic — classification task
+                temperature=0.0,  # deterministic, classification task
                 timeout=TIMEOUT
             )
             return parse_gpt4_response(
@@ -121,11 +121,11 @@ def verify_single(client, prompt, retries=MAX_RETRIES):
 
 
 def load_checkpoint():
-    """Load checkpoint if exists — resume from last saved position."""
+    """Load checkpoint if exists, resume from last saved position."""
     if os.path.exists(CHECKPOINT_PATH):
         df = pd.read_csv(CHECKPOINT_PATH)
         completed = df[df['gpt4_label'].notna()].shape[0]
-        print(f"  Checkpoint found — {completed:,} records already verified")
+        print(f"  Checkpoint found, {completed:,} records already verified")
         return df, completed
     return None, 0
 
@@ -135,10 +135,10 @@ def run_gpt4_verifier(dry_run=False, max_records=None):
     Main verification function.
 
     Args:
-        dry_run: bool — if True, simulate API calls without actually calling
-        max_records: int — limit records for testing (None = all)
+        dry_run: bool, if True, simulate API calls without actually calling
+        max_records: int, limit records for testing (None = all)
     """
-    print("HyDMIS Phase 4 — Stage 2: GPT-4 Semantic Verification")
+    print("HyDMIS Phase 4, Stage 2: GPT-4 Semantic Verification")
     print("=" * 60)
     print(f"  Model: {MODEL}")
     print(f"  Mode: {'DRY RUN (no API calls)' if dry_run else 'LIVE'}")
@@ -169,7 +169,7 @@ def run_gpt4_verifier(dry_run=False, max_records=None):
     print(f"  Estimated time: ~{time_est:.0f} minutes")
 
     if dry_run:
-        print("\n--- Dry Run — Simulating 10 records ---")
+        print("\n--- Dry Run, Simulating 10 records ---")
         sample_rows = df[df['gpt4_label'].isna()].head(10)
         for i, (idx, row) in enumerate(sample_rows.iterrows()):
             # Simulate response
@@ -213,7 +213,7 @@ def run_gpt4_verifier(dry_run=False, max_records=None):
         # Progress print every 100 records
         if (i + 1) % 100 == 0:
             pct = (i + 1) / len(pending) * 100
-            print(f"  Progress: {i+1:,}/{len(pending):,} ({pct:.1f}%) — "
+            print(f"  Progress: {i+1:,}/{len(pending):,} ({pct:.1f}%), "
                   f"verified: {n_verified:,} errors: {n_errors:,}")
 
         # Checkpoint save
@@ -240,5 +240,5 @@ def run_gpt4_verifier(dry_run=False, max_records=None):
 
 
 if __name__ == "__main__":
-    # Default: dry run — set dry_run=False and provide API key for live run
+    # Default: dry run, set dry_run=False and provide API key for live run
     run_gpt4_verifier(dry_run=False)

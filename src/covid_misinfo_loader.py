@@ -1,8 +1,8 @@
 """
-HyDMIS — Covid-vaccine-misinfo-MIC Dataset Loader
+HyDMIS, Covid-vaccine-misinfo-MIC Dataset Loader
 Hybrid Disinformation Identification System
 
-Covid-vaccine-misinfo-MIC — 5,952 multilingual tweets (Kim et al., 2023)
+Covid-vaccine-misinfo-MIC, 5,952 multilingual tweets (Kim et al., 2023)
 Health misinformation across Brazil (PT), Indonesia (ID), Nigeria (EN).
 Primary health domain multilingual dataset for HyDMIS.
 """
@@ -15,7 +15,7 @@ DATA_DIR = 'data/raw'
 
 def load_covid_misinfo(data_dir: str = DATA_DIR) -> dict:
     """
-    Load Covid-vaccine-misinfo-MIC — multilingual health misinformation.
+    Load Covid-vaccine-misinfo-MIC, multilingual health misinformation.
     Source: Kim et al. (2023) EMNLP
     5,952 annotated tweets across Brazil (PT), Indonesia (ID), Nigeria (EN).
     Primary health domain multilingual dataset for HyDMIS.
@@ -28,7 +28,7 @@ def load_covid_misinfo(data_dir: str = DATA_DIR) -> dict:
         f"{path}/annotated_data.csv",
         low_memory=False
     )
-    print(f"  ✓ Covid-misinfo-MIC: {len(df):,} records | Health | EN/PT/ID")
+    print(f"   Covid-misinfo-MIC: {len(df):,} records | Health | EN/PT/ID")
 
     return {
         'name': 'covid_misinfo_mic',

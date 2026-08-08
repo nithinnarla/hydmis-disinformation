@@ -1,14 +1,14 @@
 """
-HyDMIS — FakeNewsNet EDA
-Phase 4 — Exploratory Data Analysis
+HyDMIS, FakeNewsNet EDA
+Phase 4, Exploratory Data Analysis
 News Disinformation Domain
 
-EDA on FakeNewsNet dataset — 23,196 news articles (Shu et al., 2020).
+EDA on FakeNewsNet dataset, 23,196 news articles (Shu et al., 2020).
 PolitiFact (political) and GossipCop (celebrity) news sources.
-Content features only — title text available, no article body.
+Content features only, title text available, no article body.
 
 Label mapping: 1=Disinformation, 0=Credible
-Disinformation rate: 24.8% — imbalanced dataset.
+Disinformation rate: 24.8%, imbalanced dataset.
 GossipCop dominates: 95.4% of records.
 """
 
@@ -27,7 +27,7 @@ SOURCE_COLORS = {'politifact_fake':'#d9534f','politifact_real':'#5cb85c',
 
 
 def run_eda():
-    print("HyDMIS Phase 4 — FakeNewsNet EDA")
+    print("HyDMIS Phase 4, FakeNewsNet EDA")
     print("=" * 50)
 
     result = load_fakenewsnet(data_dir='data/raw')
@@ -43,7 +43,7 @@ def run_eda():
     for label, name in [(1,'Disinformation'),(0,'Credible')]:
         count = (df['label']==label).sum()
         print(f"  {name:<15} {count:,} ({count/len(df):.1%})")
-    print(f"  Note: Imbalanced — 24.8% disinformation")
+    print(f"  Note: Imbalanced, 24.8% disinformation")
 
     print(f"\n--- Source Distribution ---")
     for src, count in df['source'].value_counts().items():
@@ -105,7 +105,7 @@ def run_eda():
     for has, name in [(True,'Has tweets'),(False,'No tweets')]:
         subset = df[df['has_tweets']==has]
         print(f"  {name:<15} n={len(subset):,} | dis_rate={subset['label'].mean():.1%}")
-    print(f"  Note: No URL = 78.8% dis rate — missing URL is strong fake signal")
+    print(f"  Note: No URL = 78.8% dis rate, missing URL is strong fake signal")
 
     print(f"\n--- Missing Values ---")
     nulls = df[['news_url','title','tweet_ids']].isnull().sum()
@@ -114,12 +114,12 @@ def run_eda():
 
     print(f"\n--- Key Observations ---")
     print(f"  Total records: {len(df):,}")
-    print(f"  Disinformation rate: {df['label'].mean():.1%} — imbalanced")
+    print(f"  Disinformation rate: {df['label'].mean():.1%}, imbalanced")
     print(f"  GossipCop dominates: {(df['platform']=='gossipcop').mean():.1%} of records")
-    print(f"  Only title text available — no article body")
+    print(f"  Only title text available, no article body")
     print(f"  PolitiFact disinformation rate: {df[df['platform']=='politifact']['label'].mean():.1%}")
     print(f"  GossipCop disinformation rate: {df[df['platform']=='gossipcop']['label'].mean():.1%}")
-    print(f"  tweet_ids available but social graph not used — content-only by design")
+    print(f"  tweet_ids available but social graph not used, content-only by design")
 
     print(f"\n--- FakeNewsNet EDA complete ---")
     print(f"  Ready for HyDMIS Stage 1 LDA topic modeling")

@@ -1,10 +1,10 @@
 """
-HyDMIS — LIAR2 EDA
-Phase 4 — Exploratory Data Analysis
+HyDMIS, LIAR2 EDA
+Phase 4, Exploratory Data Analysis
 Political Disinformation Domain
 
-EDA on LIAR2 dataset — 22,962 political claims (Xu & Kechadi, 2024).
-Updated LIAR benchmark — PolitiFact statements with six-way veracity labels.
+EDA on LIAR2 dataset, 22,962 political claims (Xu & Kechadi, 2024).
+Updated LIAR benchmark, PolitiFact statements with six-way veracity labels.
 Used as English baseline for political disinformation detection in HyDMIS.
 
 Label mapping (confirmed from speaker history counts):
@@ -25,7 +25,7 @@ from liar2_loader import load_liar2
 
 LABEL_NAMES = {0:"pants-fire", 1:"false", 2:"barely-true",
                3:"half-true", 4:"mostly-true", 5:"true"}
-# Binary mapping — disinformation vs credible
+# Binary mapping, disinformation vs credible
 # Disinformation: pants-fire(0), false(1), barely-true(2)
 # Credible: half-true(3), mostly-true(4), true(5)
 BINARY_MAP = {0:1, 1:1, 2:1, 3:0, 4:0, 5:0}
@@ -33,7 +33,7 @@ BINARY_NAMES = {0:"Credible", 1:"Disinformation"}
 
 
 def run_eda():
-    print("HyDMIS Phase 4 — LIAR2 EDA")
+    print("HyDMIS Phase 4, LIAR2 EDA")
     print("=" * 50)
 
     result = load_liar2()
@@ -115,7 +115,7 @@ def run_eda():
 
 
 
-    print(f"\n--- Temporal Trend — Disinformation Rate by Year ---")
+    print(f"\n--- Temporal Trend, Disinformation Rate by Year ---")
     df["date_parsed"] = pd.to_datetime(df["date"], errors="coerce")
     df["year"] = df["date_parsed"].dt.year
     year_stats = df.groupby("year").agg(
@@ -126,7 +126,7 @@ def run_eda():
     for _, row in year_stats.iterrows():
         print(f"  {int(row['year'])}: n={int(row['count']):,} | dis rate: {row['dis_rate']:.1%}")
     print(f"  Note: Disinformation rate rose from 41.7% (2008) to 87.4% (2023)")
-    print(f"  Note: 2020 spike (77.9%) — COVID-19 + US presidential election")
+    print(f"  Note: 2020 spike (77.9%), COVID-19 + US presidential election")
     print(f"  Note: Post-2017 sustained rise reflects social media fact-checking expansion")
 
     print(f"\n--- Speaker Type vs Disinformation Rate ---")
