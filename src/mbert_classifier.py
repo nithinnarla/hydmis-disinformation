@@ -1,6 +1,6 @@
 """
-HyDMIS -- Stage 3: mBERT Cross-Lingual Classification Setup
-Phase 4 -- Stage 3: mBERT baseline (RemBERT primary backbone per Decision 5)
+HyDMIS - Stage 3: mBERT Cross-Lingual Classification Setup
+Phase 4 - Stage 3: mBERT baseline (RemBERT primary backbone per Decision 5)
 
 Sets up the mBERT (bert-base-multilingual-cased) classification pipeline as
 the standard cross-lingual baseline, per Decision 2's three-stage architecture.
@@ -10,16 +10,16 @@ are comparison baselines, all evaluated in Phase 4 ablations.
 TODAY'S SCOPE (Aug 4 2026): pipeline architecture setup and validation only,
 using the 14,640 directly GPT-4-labeled records as a working prototype.
 Full-scale training on the 562K+ dataset requires Mistral-7B pseudo-labeling
-(Decision 3), not yet built -- scheduled later in August per the tracker.
+(Decision 3), not yet built - scheduled later in August per the tracker.
 Real fine-tuning begins Aug 14 per the schedule; this script proves the
 pipeline works correctly, it does not produce final reported results.
 
-Training target: gpt4_label (YES/NO/UNCERTAIN), not veracity -- see Decision 13.
-The single PARTIAL record is excluded, not merged into UNCERTAIN -- see
+Training target: gpt4_label (YES/NO/UNCERTAIN), not veracity - see Decision 13.
+The single PARTIAL record is excluded, not merged into UNCERTAIN - see
 Decision 14 (PARTIAL reflects a confident partial judgment, UNCERTAIN reflects
 insufficient evidence; these are semantically distinct, not interchangeable).
 
-Pipeline/infrastructure script -- no notebook (setup/validation only, no
+Pipeline/infrastructure script - no notebook (setup/validation only, no
 headline figures yet; full training results will get their own script+notebook
 per project convention once Aug 14 fine-tuning begins).
 """
@@ -91,7 +91,7 @@ def load_and_prepare_data():
 
 
 def run_mbert_setup():
-    print("HyDMIS -- Stage 3: mBERT Classification Setup")
+    print("HyDMIS - Stage 3: mBERT Classification Setup")
     print("=" * 50)
 
     device = get_device()
@@ -154,7 +154,7 @@ def run_mbert_setup():
         print(f"  {name}: {dict(split_df['language'].value_counts())}")
 
     print("\n--- Stage 3 mBERT Setup complete ---")
-    print(f"  Pipeline validated end-to-end on {device} -- ready for Aug 14 fine-tuning")
+    print(f"  Pipeline validated end-to-end on {device} - ready for Aug 14 fine-tuning")
     print(f"  NOTE: this is a {len(df):,}-record prototype, not full-scale training.")
     print(f"  Full-scale training (562K+ records) requires Mistral-7B pseudo-labeling")
     print(f"  (Decision 13), not yet built.")

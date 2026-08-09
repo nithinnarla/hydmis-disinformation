@@ -108,14 +108,14 @@ def run_topic_clusters():
     fig, ax = plt.subplots(figsize=(14, 8))
     sns.heatmap(ct_pct, annot=True, fmt='.1%', cmap='YlOrRd', ax=ax,
                 linewidths=0.5, cbar_kws={'label': 'Proportion within topic'})
-    ax.set_title('LIAR2 Topic x Veracity, LDA Cluster Alignment\n'
+    ax.set_title('LIAR2 Topic x Veracity - LDA Cluster Alignment\n'
                  '(does unsupervised topic structure correlate with veracity labels?)',
                  fontsize=13)
     ax.set_xlabel('Veracity Label'); ax.set_ylabel('LDA Topic')
     plt.tight_layout()
     plt.savefig(os.path.join(FIGURES_DIR, 'lda_topic_veracity_heatmap.png'), dpi=150, bbox_inches='tight')
     plt.close()
-    print("  Fig 1 saved -- lda_topic_veracity_heatmap.png")
+    print("  Fig 1 saved - lda_topic_veracity_heatmap.png")
 
     # Figure 2, Topic Distribution by Veracity (stacked bar)
     ct_pct_T = ct_pct.T
@@ -129,7 +129,7 @@ def run_topic_clusters():
     plt.tight_layout()
     plt.savefig(os.path.join(FIGURES_DIR, 'lda_veracity_by_topic.png'), dpi=150, bbox_inches='tight')
     plt.close()
-    print("  Fig 2 saved -- lda_veracity_by_topic.png")
+    print("  Fig 2 saved - lda_veracity_by_topic.png")
 
     # Figure 3, Topic Size Distribution (LIAR2)
     topic_counts = liar2_df['topic'].value_counts().sort_index()
@@ -139,26 +139,26 @@ def run_topic_clusters():
     for bar, val in zip(bars, topic_counts.values):
         ax.text(bar.get_x()+bar.get_width()/2, bar.get_height()+20,
                 f'{val:,}', ha='center', fontsize=9)
-    ax.set_title('LDA Topic Size Distribution, LIAR2\n'
+    ax.set_title('LDA Topic Size Distribution - LIAR2\n'
                  '(number of documents per topic cluster)', fontsize=13)
     ax.set_xlabel('Topic'); ax.set_ylabel('Document Count')
     ax.set_xticks(range(10))
     plt.tight_layout()
     plt.savefig(os.path.join(FIGURES_DIR, 'lda_topic_size_liar2.png'), dpi=150, bbox_inches='tight')
     plt.close()
-    print("  Fig 3 saved -- lda_topic_size_liar2.png")
+    print("  Fig 3 saved - lda_topic_size_liar2.png")
 
     # Figure 4, TruthSeeker Topic x Binary Label
     ts_ct_pct = ts_ct.div(ts_ct.sum(axis=1), axis=0)
     fig, ax = plt.subplots(figsize=(10, 7))
     sns.heatmap(ts_ct_pct, annot=True, fmt='.1%', cmap='YlOrRd', ax=ax,
                 linewidths=0.5)
-    ax.set_title('TruthSeeker Topic x Label, LDA Cluster Alignment', fontsize=13)
+    ax.set_title('TruthSeeker Topic x Label - LDA Cluster Alignment', fontsize=13)
     ax.set_xlabel('Label'); ax.set_ylabel('LDA Topic')
     plt.tight_layout()
     plt.savefig(os.path.join(FIGURES_DIR, 'lda_topic_truthseeker.png'), dpi=150, bbox_inches='tight')
     plt.close()
-    print("  Fig 4 saved -- lda_topic_truthseeker.png")
+    print("  Fig 4 saved - lda_topic_truthseeker.png")
 
     # Figure 5, FakeNewsNet Topic x Label
     fnn_ct_pct = fnn_ct.div(fnn_ct.sum(axis=1), axis=0)
@@ -166,12 +166,12 @@ def run_topic_clusters():
     fig, ax = plt.subplots(figsize=(8, 7))
     sns.heatmap(fnn_ct_pct, annot=True, fmt='.1%', cmap='YlOrRd', ax=ax,
                 linewidths=0.5)
-    ax.set_title('FakeNewsNet Topic x Label, LDA Cluster Alignment', fontsize=13)
+    ax.set_title('FakeNewsNet Topic x Label - LDA Cluster Alignment', fontsize=13)
     ax.set_xlabel('Label'); ax.set_ylabel('LDA Topic')
     plt.tight_layout()
     plt.savefig(os.path.join(FIGURES_DIR, 'lda_topic_fakenewsnet.png'), dpi=150, bbox_inches='tight')
     plt.close()
-    print("  Fig 5 saved -- lda_topic_fakenewsnet.png")
+    print("  Fig 5 saved - lda_topic_fakenewsnet.png")
 
     # Figure 6, Dominant veracity per topic (bar)
     dominant_labels = ct_pct.idxmax(axis=1)
@@ -189,13 +189,13 @@ def run_topic_clusters():
         ax.text(bar.get_x()+bar.get_width()/2, bar.get_height()+0.005,
                 f'{label}\n{pct:.1%}', ha='center', fontsize=8)
     ax.set_xticks(range(10)); ax.set_xticklabels([f'T{i}' for i in range(10)])
-    ax.set_title('Dominant Veracity Label per LDA Topic, LIAR2\n'
+    ax.set_title('Dominant Veracity Label per LDA Topic - LIAR2\n'
                  '(green=credible, red=disinformation)', fontsize=12)
     ax.set_ylabel('Proportion'); ax.set_ylim(0, 0.6)
     plt.tight_layout()
     plt.savefig(os.path.join(FIGURES_DIR, 'lda_dominant_veracity_per_topic.png'), dpi=150, bbox_inches='tight')
     plt.close()
-    print("  Fig 6 saved -- lda_dominant_veracity_per_topic.png")
+    print("  Fig 6 saved - lda_dominant_veracity_per_topic.png")
 
 
     print(f"\n--- Cross-Dataset Topic Distribution ---")
@@ -224,14 +224,14 @@ def run_topic_clusters():
     ax.bar(xi, ts_pct.reindex(range(10), fill_value=0).values, wi, label='TruthSeeker (134k)', color='coral', edgecolor='black', linewidth=0.4)
     ax.bar(xi+wi, fnn_pct.reindex(range(10), fill_value=0).values, wi, label='FakeNewsNet (23k)', color='#5cb85c', edgecolor='black', linewidth=0.4)
     ax.set_xticks(xi); ax.set_xticklabels([f'T{i}' for i in range(10)])
-    ax.set_title('Cross-dataset Topic Distribution, LIAR2 vs TruthSeeker vs FakeNewsNet\n'
+    ax.set_title('Cross-dataset Topic Distribution - LIAR2 vs TruthSeeker vs FakeNewsNet\n'
                  '(different datasets concentrate in different topics, domain-specific content validated)',
                  fontsize=12)
     ax.set_ylabel('Proportion of Documents'); ax.legend(fontsize=9)
     plt.tight_layout()
     plt.savefig(os.path.join(FIGURES_DIR, 'lda_cross_dataset_topics.png'), dpi=150, bbox_inches='tight')
     plt.close()
-    print("  Fig 7 saved -- lda_cross_dataset_topics.png")
+    print("  Fig 7 saved - lda_cross_dataset_topics.png")
 
 
     print(f"\n--- DeFaktS Topic Assignment (German LDA) ---")
@@ -255,12 +255,12 @@ def run_topic_clusters():
     de_ct_pct = de_ct.div(de_ct.sum(axis=1), axis=0)
     fig, ax = plt.subplots(figsize=(8, 7))
     sns.heatmap(de_ct_pct, annot=True, fmt='.1%', cmap='YlOrRd', ax=ax, linewidths=0.5)
-    ax.set_title('DeFaktS Topic x Binary Label, German LDA\n(real=0 vs fake=1)', fontsize=12)
+    ax.set_title('DeFaktS Topic x Binary Label - German LDA\n(real=0 vs fake=1)', fontsize=12)
     ax.set_xlabel('Label'); ax.set_ylabel('German LDA Topic')
     plt.tight_layout()
     plt.savefig(os.path.join(FIGURES_DIR, 'lda_topic_defakts.png'), dpi=150, bbox_inches='tight')
     plt.close()
-    print("  Fig 8 saved -- lda_topic_defakts.png")
+    print("  Fig 8 saved - lda_topic_defakts.png")
 
     # Figure 9, NewsPolyML Topic x Normalized Label (Multilingual LDA)
     from newspolyml_loader import load_newspolyml
@@ -277,12 +277,12 @@ def run_topic_clusters():
     ml_ct_pct = ml_ct.div(ml_ct.sum(axis=1), axis=0)
     fig, ax = plt.subplots(figsize=(10, 7))
     sns.heatmap(ml_ct_pct, annot=True, fmt='.1%', cmap='YlOrRd', ax=ax, linewidths=0.5)
-    ax.set_title('NewsPolyML Topic x Normalized Label, Multilingual LDA\n(true/mixture/false across 5 languages)', fontsize=12)
+    ax.set_title('NewsPolyML Topic x Normalized Label - Multilingual LDA\n(true/mixture/false across 5 languages)', fontsize=12)
     ax.set_xlabel('Label'); ax.set_ylabel('Multilingual LDA Topic')
     plt.tight_layout()
     plt.savefig(os.path.join(FIGURES_DIR, 'lda_topic_newspolyml.png'), dpi=150, bbox_inches='tight')
     plt.close()
-    print("  Fig 9 saved -- lda_topic_newspolyml.png")
+    print("  Fig 9 saved - lda_topic_newspolyml.png")
 
     print(f"\n--- LDA Topic Clusters complete ---")
     print(f"  6 figures saved to figures/stage1/")

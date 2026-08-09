@@ -1,6 +1,6 @@
 """
-HyDMIS -- LDA Training and Hyperparameter Optimization
-Phase 4 -- Stage 1: Topic Coherence Scoring and Model Selection
+HyDMIS - LDA Training and Hyperparameter Optimization
+Phase 4 - Stage 1: Topic Coherence Scoring and Model Selection
 
 Evaluates LDA topic coherence across n_topics range for each corpus.
 Selects optimal number of topics based on coherence scores.
@@ -28,12 +28,14 @@ from sklearn.decomposition import LatentDirichletAllocation
 import re
 import string
 
-os.makedirs("figures/stage1", exist_ok=True)
+REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+FIGURES_DIR = os.path.join(REPO_ROOT, "figures", "stage1")
+os.makedirs(FIGURES_DIR, exist_ok=True)
 
 RANDOM_STATE = 42
 MAX_ITER = 20
 MAX_FEATURES = 5000
-TOPICS_RANGE = [8, 9, 10, 11, 12, 15]  # min 8 -- consistent with lda_pipeline.py findings
+TOPICS_RANGE = [8, 9, 10, 11, 12, 15]  # min 8 - consistent with lda_pipeline.py findings
 SAMPLE_SIZE = 50000
 COHERENCE_SAMPLE = 10000  # smaller sample for coherence scoring speed
 
@@ -121,7 +123,7 @@ def get_top_words(lda_model, vectorizer, n_words=10):
 
 
 def run_lda_train():
-    print("HyDMIS Phase 4 -- Stage 1: LDA Training and Hyperparameter Optimization")
+    print("HyDMIS Phase 4 - Stage 1: LDA Training and Hyperparameter Optimization")
     print("=" * 72)
 
     print("\n--- Loading Datasets ---")
@@ -208,7 +210,7 @@ def run_lda_train():
     # FIGURES
     print(f"\n--- Generating Figures ---")
 
-    # Fig 1 -- Log-Likelihood vs n_topics
+    # Fig 1 - Log-Likelihood vs n_topics
     fig, axes = plt.subplots(1, 3, figsize=(15, 5))
     for ax, results, title, color in zip(
         axes,
@@ -223,12 +225,12 @@ def run_lda_train():
         ax.set_title(f"{title} Corpus\nLog-Likelihood vs n_topics", fontsize=11, fontweight="bold")
         ax.set_xlabel("Number of Topics"); ax.set_ylabel("Log-Likelihood"); ax.legend()
         ax.grid(True, alpha=0.3)
-    plt.suptitle("HyDMIS -- LDA Coherence: Log-Likelihood vs n_topics", fontsize=12, fontweight="bold")
+    plt.suptitle("HyDMIS - LDA Coherence: Log-Likelihood vs n_topics", fontsize=12, fontweight="bold")
     plt.tight_layout()
-    plt.savefig("figures/stage1/lda_log_likelihood.png", dpi=150, bbox_inches="tight")
-    plt.close(); print("Fig 1 saved -- lda_log_likelihood.png")
+    plt.savefig(os.path.join(FIGURES_DIR, "lda_log_likelihood.png"), dpi=150, bbox_inches="tight")
+    plt.close(); print("Fig 1 saved - lda_log_likelihood.png")
 
-    # Fig 2 -- Perplexity vs n_topics
+    # Fig 2 - Perplexity vs n_topics
     fig, axes = plt.subplots(1, 3, figsize=(15, 5))
     for ax, results, title, color in zip(
         axes,
@@ -243,12 +245,12 @@ def run_lda_train():
         ax.set_title(f"{title} Corpus\nPerplexity vs n_topics", fontsize=11, fontweight="bold")
         ax.set_xlabel("Number of Topics"); ax.set_ylabel("Perplexity"); ax.legend()
         ax.grid(True, alpha=0.3)
-    plt.suptitle("HyDMIS -- LDA Coherence: Perplexity vs n_topics (lower = better)", fontsize=12, fontweight="bold")
+    plt.suptitle("HyDMIS - LDA Coherence: Perplexity vs n_topics (lower = better)", fontsize=12, fontweight="bold")
     plt.tight_layout()
-    plt.savefig("figures/stage1/lda_perplexity.png", dpi=150, bbox_inches="tight")
-    plt.close(); print("Fig 2 saved -- lda_perplexity.png")
+    plt.savefig(os.path.join(FIGURES_DIR, "lda_perplexity.png"), dpi=150, bbox_inches="tight")
+    plt.close(); print("Fig 2 saved - lda_perplexity.png")
 
-    # Fig 3 -- Top Words Heatmap English
+    # Fig 3 - Top Words Heatmap English
     en_top_words = get_top_words(en_lda, en_vec, n_words=8)
     n_t = len(en_top_words)
     fig, ax = plt.subplots(figsize=(14, max(6, n_t*0.8)))
@@ -264,12 +266,12 @@ def run_lda_train():
                    cellLoc="left", loc="center")
     tbl.auto_set_font_size(False); tbl.set_fontsize(9)
     tbl.auto_set_column_width([0])
-    ax.set_title(f"English LDA -- Top Words per Topic ({n_t} topics)", fontsize=12, fontweight="bold", pad=20)
+    ax.set_title(f"English LDA - Top Words per Topic ({n_t} topics)", fontsize=12, fontweight="bold", pad=20)
     plt.tight_layout()
-    plt.savefig("figures/stage1/lda_english_topics.png", dpi=150, bbox_inches="tight")
-    plt.close(); print("Fig 3 saved -- lda_english_topics.png")
+    plt.savefig(os.path.join(FIGURES_DIR, "lda_english_topics.png"), dpi=150, bbox_inches="tight")
+    plt.close(); print("Fig 3 saved - lda_english_topics.png")
 
-    # Fig 4 -- Top Words German
+    # Fig 4 - Top Words German
     de_top_words = get_top_words(de_lda, de_vec, n_words=8)
     n_t_de = len(de_top_words)
     fig, ax = plt.subplots(figsize=(14, max(6, n_t_de*0.8)))
@@ -281,12 +283,12 @@ def run_lda_train():
                    cellLoc="left", loc="center")
     tbl.auto_set_font_size(False); tbl.set_fontsize(9)
     tbl.auto_set_column_width([0])
-    ax.set_title(f"German LDA (DeFaktS) -- Top Words per Topic ({n_t_de} topics)", fontsize=12, fontweight="bold", pad=20)
+    ax.set_title(f"German LDA (DeFaktS) - Top Words per Topic ({n_t_de} topics)", fontsize=12, fontweight="bold", pad=20)
     plt.tight_layout()
-    plt.savefig("figures/stage1/lda_german_topics.png", dpi=150, bbox_inches="tight")
-    plt.close(); print("Fig 4 saved -- lda_german_topics.png")
+    plt.savefig(os.path.join(FIGURES_DIR, "lda_german_topics.png"), dpi=150, bbox_inches="tight")
+    plt.close(); print("Fig 4 saved - lda_german_topics.png")
 
-    # Fig 5 -- Topic Distribution English
+    # Fig 5 - Topic Distribution English
     vectorizer_en = CountVectorizer(
         max_features=MAX_FEATURES, stop_words=en_stopwords,
         min_df=5, max_df=0.95, ngram_range=(1, 2)
@@ -302,15 +304,15 @@ def run_lda_train():
         ax.text(bar.get_x()+bar.get_width()/2, val+50, str(val), ha="center", fontsize=8)
     ax.set_xticks(range(len(topic_counts)))
     ax.set_xticklabels([f"T{i}" for i in range(len(topic_counts))])
-    ax.set_title(f"English Corpus -- Topic Distribution ({int(best_en['n_topics'])} topics, {len(english_texts):,} texts)",
+    ax.set_title(f"English Corpus - Topic Distribution ({int(best_en['n_topics'])} topics, {len(english_texts):,} texts)",
                 fontsize=11, fontweight="bold")
     ax.set_xlabel("Topic"); ax.set_ylabel("Number of Texts")
     plt.tight_layout()
-    plt.savefig("figures/stage1/lda_english_topic_dist.png", dpi=150, bbox_inches="tight")
-    plt.close(); print("Fig 5 saved -- lda_english_topic_dist.png")
+    plt.savefig(os.path.join(FIGURES_DIR, "lda_english_topic_dist.png"), dpi=150, bbox_inches="tight")
+    plt.close(); print("Fig 5 saved - lda_english_topic_dist.png")
 
 
-    # Fig 6 -- Topic Distribution German
+    # Fig 6 - Topic Distribution German
     vec_de2 = CountVectorizer(max_features=MAX_FEATURES, stop_words=de_stopwords,
                               min_df=5, max_df=0.95, ngram_range=(1, 2))
     dtm_de2 = vec_de2.fit_transform(de_texts)
@@ -324,14 +326,14 @@ def run_lda_train():
         ax.text(bar.get_x()+bar.get_width()/2, val+50, str(val), ha="center", fontsize=8)
     ax.set_xticks(range(len(counts_de)))
     ax.set_xticklabels([f"T{i}" for i in range(len(counts_de))])
-    ax.set_title(f"German Corpus (DeFaktS) -- Topic Distribution ({n_de} topics, {len(de_texts):,} texts)",
+    ax.set_title(f"German Corpus (DeFaktS) - Topic Distribution ({n_de} topics, {len(de_texts):,} texts)",
                 fontsize=11, fontweight="bold")
     ax.set_xlabel("Topic"); ax.set_ylabel("Number of Texts")
     plt.tight_layout()
-    plt.savefig("figures/stage1/lda_german_topic_dist.png", dpi=150, bbox_inches="tight")
-    plt.close(); print("Fig 6 saved -- lda_german_topic_dist.png")
+    plt.savefig(os.path.join(FIGURES_DIR, "lda_german_topic_dist.png"), dpi=150, bbox_inches="tight")
+    plt.close(); print("Fig 6 saved - lda_german_topic_dist.png")
 
-    # Fig 7 -- Topic Distribution Multilingual
+    # Fig 7 - Topic Distribution Multilingual
     vec_multi2 = CountVectorizer(max_features=MAX_FEATURES, stop_words=get_english_stopwords(),
                                  min_df=5, max_df=0.95, ngram_range=(1, 2))
     dtm_multi2 = vec_multi2.fit_transform(npm_texts)
@@ -345,15 +347,15 @@ def run_lda_train():
         ax.text(bar.get_x()+bar.get_width()/2, val+20, str(val), ha="center", fontsize=8)
     ax.set_xticks(range(len(counts_multi)))
     ax.set_xticklabels([f"T{i}" for i in range(len(counts_multi))])
-    ax.set_title(f"Multilingual Corpus (NewsPolyML) -- Topic Distribution ({n_multi} topics, {len(npm_texts):,} texts)",
+    ax.set_title(f"Multilingual Corpus (NewsPolyML) - Topic Distribution ({n_multi} topics, {len(npm_texts):,} texts)",
                 fontsize=11, fontweight="bold")
     ax.set_xlabel("Topic"); ax.set_ylabel("Number of Texts")
     plt.tight_layout()
-    plt.savefig("figures/stage1/lda_multilingual_topic_dist.png", dpi=150, bbox_inches="tight")
-    plt.close(); print("Fig 7 saved -- lda_multilingual_topic_dist.png")
+    plt.savefig(os.path.join(FIGURES_DIR, "lda_multilingual_topic_dist.png"), dpi=150, bbox_inches="tight")
+    plt.close(); print("Fig 7 saved - lda_multilingual_topic_dist.png")
 
 
-    # Fig 8 -- Top Words Multilingual
+    # Fig 8 - Top Words Multilingual
     multi_top_words = get_top_words(multi_lda, multi_vec, n_words=8)
     n_t_multi = len(multi_top_words)
     fig, ax = plt.subplots(figsize=(14, max(6, n_t_multi*0.8)))
@@ -364,16 +366,16 @@ def run_lda_train():
                    cellLoc="left", loc="center")
     tbl.auto_set_font_size(False); tbl.set_fontsize(9)
     tbl.auto_set_column_width([0])
-    ax.set_title(f"Multilingual LDA (NewsPolyML) -- Top Words per Topic ({n_t_multi} topics)",
+    ax.set_title(f"Multilingual LDA (NewsPolyML) - Top Words per Topic ({n_t_multi} topics)",
                 fontsize=12, fontweight="bold", pad=20)
     plt.tight_layout()
-    plt.savefig("figures/stage1/lda_multilingual_topics.png", dpi=150, bbox_inches="tight")
-    plt.close(); print("Fig 8 saved -- lda_multilingual_topics.png")
+    plt.savefig(os.path.join(FIGURES_DIR, "lda_multilingual_topics.png"), dpi=150, bbox_inches="tight")
+    plt.close(); print("Fig 8 saved - lda_multilingual_topics.png")
 
     print(f"\n--- LDA Training complete ---")
     print(f"  6 figures saved to figures/stage1/")
     print(f"  Optimal topics: English={int(best_en['n_topics'])}, German={int(best_de['n_topics'])}, Multilingual={int(best_multi['n_topics'])}")
-    print(f"  Ready for lda_validation.py -- topic cluster analysis and disinformation mapping")
+    print(f"  Ready for lda_validation.py - topic cluster analysis and disinformation mapping")
 
     return en_lda, en_vec, de_lda, de_vec, multi_lda, multi_vec, en_results, de_results, multi_results
 

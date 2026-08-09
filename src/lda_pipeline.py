@@ -264,7 +264,7 @@ def run_pipeline():
     assignments_df.to_csv(output_path, index=False)
     print(f"  Saved {len(assignments_df):,} topic assignments to {output_path}")
     print(f"  Columns: dataset, record_id, lda_topic_id, lda_model")
-    print(f"  This file did not exist before -- gpt4_sampler.py previously used a hardcoded")
+    print(f"  This file did not exist before - gpt4_sampler.py previously used a hardcoded")
     print(f"  lda_topic_id=-1 placeholder because no LDA output was ever persisted to disk.")
 
     print(f"\n--- LDA Pipeline complete ---")

@@ -159,14 +159,14 @@ def run_lda_validation():
                     f'{val:.3f}', ha='center', fontsize=9)
         ax.set_xticks(xi)
         ax.set_xticklabels([f'T{i}' for i in range(len(en_per_topic))])
-        ax.set_title('C_v Coherence per Topic, English LDA\n'
+        ax.set_title('C_v Coherence per Topic - English LDA\n'
                      '(green = good coherence ≥ 0.4, red = moderate)', fontsize=12)
         ax.set_ylabel('C_v Coherence Score')
         ax.legend(fontsize=9)
         plt.tight_layout()
         plt.savefig(os.path.join(FIGURES_DIR, 'lda_coherence_english.png'), dpi=150, bbox_inches='tight')
         plt.close()
-        print("  Fig 1 saved -- lda_coherence_english.png")
+        print("  Fig 1 saved - lda_coherence_english.png")
 
     # Figure 2, C_v Coherence comparison across models
     models = ['English\n(10 topics)', 'German\n(8 topics)', 'Multilingual\n(10 topics)']
@@ -178,7 +178,7 @@ def run_lda_validation():
     for bar, val in zip(bars, scores):
         ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.005,
                 f'{val:.3f}', ha='center', fontsize=12, fontweight='bold')
-    ax.set_title('C_v Coherence Score, All LDA Models\n'
+    ax.set_title('C_v Coherence Score - All LDA Models\n'
                  '(English / German / Multilingual)', fontsize=12)
     ax.set_ylabel('C_v Coherence Score')
     ax.set_ylim(0, max(scores) * 1.2 + 0.1)
@@ -186,7 +186,7 @@ def run_lda_validation():
     plt.tight_layout()
     plt.savefig(os.path.join(FIGURES_DIR, 'lda_coherence_comparison.png'), dpi=150, bbox_inches='tight')
     plt.close()
-    print("  Fig 2 saved -- lda_coherence_comparison.png")
+    print("  Fig 2 saved - lda_coherence_comparison.png")
 
     # Figure 3, Inter-topic distance heatmap (English)
     fig, ax = plt.subplots(figsize=(10, 8))
@@ -194,12 +194,12 @@ def run_lda_validation():
                 xticklabels=[f'T{i}' for i in range(en_dist.shape[0])],
                 yticklabels=[f'T{i}' for i in range(en_dist.shape[0])],
                 linewidths=0.5)
-    ax.set_title('Inter-Topic Distance Matrix, English LDA\n'
+    ax.set_title('Inter-Topic Distance Matrix - English LDA\n'
                  '(higher = more distinct topics)', fontsize=12)
     plt.tight_layout()
     plt.savefig(os.path.join(FIGURES_DIR, 'lda_topic_distance_english.png'), dpi=150, bbox_inches='tight')
     plt.close()
-    print("  Fig 3 saved -- lda_topic_distance_english.png")
+    print("  Fig 3 saved - lda_topic_distance_english.png")
 
     # Figure 4, Inter-topic distance heatmap (German)
     fig, ax = plt.subplots(figsize=(9, 7))
@@ -207,12 +207,12 @@ def run_lda_validation():
                 xticklabels=[f'T{i}' for i in range(de_dist.shape[0])],
                 yticklabels=[f'T{i}' for i in range(de_dist.shape[0])],
                 linewidths=0.5)
-    ax.set_title('Inter-Topic Distance Matrix, German LDA\n'
+    ax.set_title('Inter-Topic Distance Matrix - German LDA\n'
                  '(higher = more distinct topics)', fontsize=12)
     plt.tight_layout()
     plt.savefig(os.path.join(FIGURES_DIR, 'lda_topic_distance_german.png'), dpi=150, bbox_inches='tight')
     plt.close()
-    print("  Fig 4 saved -- lda_topic_distance_german.png")
+    print("  Fig 4 saved - lda_topic_distance_german.png")
 
 
     # Figure 5, C_v Coherence per topic (German)
@@ -229,14 +229,14 @@ def run_lda_validation():
                     f'{val:.3f}', ha='center', fontsize=9)
         ax.set_xticks(xi)
         ax.set_xticklabels([f'T{i}' for i in range(len(de_per_topic))])
-        ax.set_title('C_v Coherence per Topic, German LDA\n'
+        ax.set_title('C_v Coherence per Topic - German LDA\n'
                      '(green = good coherence ≥ 0.4, red = moderate)', fontsize=12)
         ax.set_ylabel('C_v Coherence Score')
         ax.legend(fontsize=9)
         plt.tight_layout()
         plt.savefig(os.path.join(FIGURES_DIR, 'lda_coherence_german.png'), dpi=150, bbox_inches='tight')
         plt.close()
-        print("  Fig 5 saved -- lda_coherence_german.png")
+        print("  Fig 5 saved - lda_coherence_german.png")
 
     # Figure 6, Inter-topic distance heatmap (Multilingual)
     fig, ax = plt.subplots(figsize=(10, 8))
@@ -244,12 +244,12 @@ def run_lda_validation():
                 xticklabels=[f'T{i}' for i in range(ml_dist.shape[0])],
                 yticklabels=[f'T{i}' for i in range(ml_dist.shape[0])],
                 linewidths=0.5)
-    ax.set_title('Inter-Topic Distance Matrix, Multilingual LDA\n'
+    ax.set_title('Inter-Topic Distance Matrix - Multilingual LDA\n'
                  '(higher = more distinct topics; mean=0.984 highest of 3 models)', fontsize=12)
     plt.tight_layout()
     plt.savefig(os.path.join(FIGURES_DIR, 'lda_topic_distance_multilingual.png'), dpi=150, bbox_inches='tight')
     plt.close()
-    print("  Fig 6 saved -- lda_topic_distance_multilingual.png")
+    print("  Fig 6 saved - lda_topic_distance_multilingual.png")
 
 
     # Figure 7, C_v Coherence per topic (Multilingual)
@@ -266,14 +266,14 @@ def run_lda_validation():
                     f'{val:.3f}', ha='center', fontsize=9)
         ax.set_xticks(xi)
         ax.set_xticklabels([f'T{i}' for i in range(len(ml_per_topic))])
-        ax.set_title('C_v Coherence per Topic, Multilingual LDA\n'
+        ax.set_title('C_v Coherence per Topic - Multilingual LDA\n'
                      '(green = good coherence ≥ 0.4, red = moderate)', fontsize=12)
         ax.set_ylabel('C_v Coherence Score')
         ax.legend(fontsize=9)
         plt.tight_layout()
         plt.savefig(os.path.join(FIGURES_DIR, 'lda_coherence_multilingual.png'), dpi=150, bbox_inches='tight')
         plt.close()
-        print("  Fig 7 saved -- lda_coherence_multilingual.png")
+        print("  Fig 7 saved - lda_coherence_multilingual.png")
 
     print(f"\n--- LDA Validation complete ---")
     print(f"  7 figures saved to figures/stage1/")
