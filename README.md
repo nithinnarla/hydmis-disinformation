@@ -136,8 +136,8 @@ Full dependency list: `requirements.txt`
 
 🔬 Research in progress, Stages 1-2 complete, Stage 3 starting
 
-**Stage 1 (complete):** LDA topic modeling across 5 multilingual datasets, 24 figures committed. Topic assignments now persisted to data/processed/lda_topic_assignments.csv (177,074 records) via lda_pipeline.py -- previously never saved to disk (see methodology_decisions.md Decision 11).
-**Stage 2 (complete):** GPT-4 semantic verification, 14,640 records verified, 0 errors (gpt4_verifier.py). Code-switching screening flag built (code_switching_flagger.py, 756 records / 5.2% flagged, known confidence-score limitations documented). Stage 2 ablation (stage2_ablation.py) confirms GPT-4 verification adds real discriminative value over LDA topic alone: baseline majority-class guess 42.1% vs. 45.7% knowing LDA topic (+3.6pp) -- see methodology_decisions.md Decision 12.
+**Stage 1 (complete):** LDA topic modeling across 5 multilingual datasets, 24 figures committed. Topic assignments now persisted to data/processed/lda_topic_assignments.csv (177,074 records) via lda_pipeline.py, which had previously never saved them to disk (see methodology_decisions.md Decision 11).
+**Stage 2 (complete):** GPT-4 semantic verification, 14,640 records verified, 0 errors (gpt4_verifier.py). Code-switching screening flag built (code_switching_flagger.py, 756 records / 5.2% flagged, known confidence-score limitations documented). Stage 2 ablation (stage2_ablation.py) confirms GPT-4 verification adds real discriminative value over LDA topic alone: baseline majority-class guess 42.1% vs. 45.7% knowing LDA topic (+3.6pp); see methodology_decisions.md Decision 12.
 
 Target venue: EMNLP 2027, ARR submission ~May 2027 (arXiv preprint Dec 22 2026)
 
