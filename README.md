@@ -2,7 +2,7 @@
 
 ## The Problem I Kept Running Into
 
-Eight years of building ML systems in production, clinical NLP, healthcare triage, enterprise pipelines, and one pattern repeated across every platform-scale content moderation system I worked near: detection systems are trained, benchmarked, and deployed on majority-language data, and then treated as solved for everyone else.
+Seven years of building ML systems in production, clinical NLP, healthcare triage, enterprise pipelines, and one pattern repeated across every platform-scale content moderation system I worked near: detection systems are trained, benchmarked, and deployed on majority-language data, and then treated as solved for everyone else.
 
 They are not solved for everyone else. Disinformation about COVID-19 vaccines spread fastest in WhatsApp groups in Portuguese, Tagalog, and Haitian Creole, languages where labeled training data is sparse and where mBERT transfer accuracy drops 15-25 points compared to English. The communities most targeted by health disinformation are exactly the communities where the systems fail hardest. That is not a coincidence, it is a structural property of how these systems are built.
 
