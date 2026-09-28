@@ -1,6 +1,6 @@
 """
-HyDMIS - LDA Training and Hyperparameter Optimization
-Phase 4 - Stage 1: Topic Coherence Scoring and Model Selection
+HyDMIS, LDA Training and Hyperparameter Optimization
+Phase 4, Stage 1: Topic Coherence Scoring and Model Selection
 
 Evaluates LDA topic coherence across n_topics range for each corpus.
 Selects optimal number of topics based on coherence scores.
@@ -35,7 +35,7 @@ os.makedirs(FIGURES_DIR, exist_ok=True)
 RANDOM_STATE = 42
 MAX_ITER = 20
 MAX_FEATURES = 5000
-TOPICS_RANGE = [8, 9, 10, 11, 12, 15]  # min 8 - consistent with lda_pipeline.py findings
+TOPICS_RANGE = [8, 9, 10, 11, 12, 15]  # min 8; consistent with lda_pipeline.py findings
 SAMPLE_SIZE = 50000
 COHERENCE_SAMPLE = 10000  # smaller sample for coherence scoring speed
 
@@ -210,7 +210,7 @@ def run_lda_train():
     # FIGURES
     print(f"\n--- Generating Figures ---")
 
-    # Fig 1 - Log-Likelihood vs n_topics
+    # Fig 1, Log-Likelihood vs n_topics
     fig, axes = plt.subplots(1, 3, figsize=(15, 5))
     for ax, results, title, color in zip(
         axes,
@@ -230,7 +230,7 @@ def run_lda_train():
     plt.savefig(os.path.join(FIGURES_DIR, "lda_log_likelihood.png"), dpi=150, bbox_inches="tight")
     plt.close(); print("Fig 1 saved - lda_log_likelihood.png")
 
-    # Fig 2 - Perplexity vs n_topics
+    # Fig 2, Perplexity vs n_topics
     fig, axes = plt.subplots(1, 3, figsize=(15, 5))
     for ax, results, title, color in zip(
         axes,
@@ -250,7 +250,7 @@ def run_lda_train():
     plt.savefig(os.path.join(FIGURES_DIR, "lda_perplexity.png"), dpi=150, bbox_inches="tight")
     plt.close(); print("Fig 2 saved - lda_perplexity.png")
 
-    # Fig 3 - Top Words Heatmap English
+    # Fig 3, Top Words Heatmap English
     en_top_words = get_top_words(en_lda, en_vec, n_words=8)
     n_t = len(en_top_words)
     fig, ax = plt.subplots(figsize=(14, max(6, n_t*0.8)))
@@ -271,7 +271,7 @@ def run_lda_train():
     plt.savefig(os.path.join(FIGURES_DIR, "lda_english_topics.png"), dpi=150, bbox_inches="tight")
     plt.close(); print("Fig 3 saved - lda_english_topics.png")
 
-    # Fig 4 - Top Words German
+    # Fig 4, Top Words German
     de_top_words = get_top_words(de_lda, de_vec, n_words=8)
     n_t_de = len(de_top_words)
     fig, ax = plt.subplots(figsize=(14, max(6, n_t_de*0.8)))
@@ -288,7 +288,7 @@ def run_lda_train():
     plt.savefig(os.path.join(FIGURES_DIR, "lda_german_topics.png"), dpi=150, bbox_inches="tight")
     plt.close(); print("Fig 4 saved - lda_german_topics.png")
 
-    # Fig 5 - Topic Distribution English
+    # Fig 5, Topic Distribution English
     vectorizer_en = CountVectorizer(
         max_features=MAX_FEATURES, stop_words=en_stopwords,
         min_df=5, max_df=0.95, ngram_range=(1, 2)
@@ -312,7 +312,7 @@ def run_lda_train():
     plt.close(); print("Fig 5 saved - lda_english_topic_dist.png")
 
 
-    # Fig 6 - Topic Distribution German
+    # Fig 6, Topic Distribution German
     vec_de2 = CountVectorizer(max_features=MAX_FEATURES, stop_words=de_stopwords,
                               min_df=5, max_df=0.95, ngram_range=(1, 2))
     dtm_de2 = vec_de2.fit_transform(de_texts)
@@ -333,7 +333,7 @@ def run_lda_train():
     plt.savefig(os.path.join(FIGURES_DIR, "lda_german_topic_dist.png"), dpi=150, bbox_inches="tight")
     plt.close(); print("Fig 6 saved - lda_german_topic_dist.png")
 
-    # Fig 7 - Topic Distribution Multilingual
+    # Fig 7, Topic Distribution Multilingual
     vec_multi2 = CountVectorizer(max_features=MAX_FEATURES, stop_words=get_english_stopwords(),
                                  min_df=5, max_df=0.95, ngram_range=(1, 2))
     dtm_multi2 = vec_multi2.fit_transform(npm_texts)
@@ -355,7 +355,7 @@ def run_lda_train():
     plt.close(); print("Fig 7 saved - lda_multilingual_topic_dist.png")
 
 
-    # Fig 8 - Top Words Multilingual
+    # Fig 8, Top Words Multilingual
     multi_top_words = get_top_words(multi_lda, multi_vec, n_words=8)
     n_t_multi = len(multi_top_words)
     fig, ax = plt.subplots(figsize=(14, max(6, n_t_multi*0.8)))

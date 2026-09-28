@@ -1,6 +1,6 @@
 """
-HyDMIS - Stage 2 Ablation
-Phase 4 - Stage 2: Quantifying GPT-4 Semantic Verification's Value Over LDA Alone
+HyDMIS, Stage 2 Ablation
+Phase 4, Stage 2: Quantifying GPT-4 Semantic Verification's Value Over LDA Alone
 
 Answers: does knowing a record's LDA topic (Stage 1) meaningfully predict its
 GPT-4-verified veracity label (Stage 2), or does GPT-4 verification add
@@ -10,7 +10,7 @@ Method: for each LDA topic, compute the majority GPT-4 label's share of
 records in that topic. Average this across topics and compare against the
 naive baseline (guessing the single most common label overall, ignoring
 topic entirely). A small improvement over baseline means LDA topics do not
-meaningfully separate veracity classes - confirming GPT-4 verification is
+meaningfully separate veracity classes; confirming GPT-4 verification is
 necessary, not redundant with Stage 1.
 
 Data note: only 11,294 of 14,640 GPT-4-verified records (77.1%) have a real
@@ -22,9 +22,9 @@ datasets. The two samples, drawn independently with random_state=42 from
 datasets of different sizes, overlap only partially by chance. LIAR2,
 FakeNewsNet, and NewsPolyML LDA ran on their full datasets and show
 near-complete (98-100%) match rates; TruthSeeker and DeFaktS, LDA-subsampled,
-show ~45% match rates - consistent with this explanation.
+show ~45% match rates; consistent with this explanation.
 
-Pipeline/infrastructure script - no notebook (no figures; single quantitative
+Pipeline/infrastructure script, no notebook (no figures; single quantitative
 result, matches methodology_decisions.md Decision 11 documentation pattern).
 """
 

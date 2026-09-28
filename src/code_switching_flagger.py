@@ -1,6 +1,6 @@
 """
-HyDMIS - Code-Switching Detection Flag
-Phase 4 - Stage 2: Flag records with possible language mixing
+HyDMIS, Code-Switching Detection Flag
+Phase 4, Stage 2: Flag records with possible language mixing
 
 Uses langdetect's confidence score as an imperfect signal for possible
 code-switching or ambiguous-language content. Records below a confidence
@@ -11,9 +11,9 @@ KNOWN LIMITATION (validated manually before building this script):
 langdetect's single-language confidence score is not a reliable code-switching
 detector. Tested against two constructed mixed-language examples:
 - English/German mix: langdetect scored en=0.9999 (high confidence, single
-  language) - completely missed the code-switching.
+  language), completely missing the code-switching.
 - English/Spanish mix: langdetect scored fr=0.57 as top guess (wrong language
-  entirely) - low confidence correctly signaled "something is off" but did
+  entirely). Low confidence correctly signaled "something is off" but did
   not correctly identify either true language present.
 This means: a LOW confidence score is a useful (if imperfect) signal that a
 record may need manual review or cross-lingual-aware handling downstream.
@@ -22,7 +22,7 @@ it can still miss real code-switching, as demonstrated above.
 
 This script is a screening flag, not a definitive code-switching classifier.
 
-Pipeline/infrastructure script - no notebook.
+Pipeline/infrastructure script, no notebook.
 """
 
 import os
