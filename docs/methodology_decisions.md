@@ -129,7 +129,7 @@ Community-weighted loss is the most direct intervention: it changes what the mod
 Seven Indic languages covering South Asian diaspora communities, the most significant low-resource language gap in the original 7 datasets. South Asian communities in the US are primary targets of health and civic participation disinformation. No other dataset in the corpus covers this language family.
 
 **Why add ClimateMiSt:**
-146,670 tweets with veracity and stance annotations, largest climate disinformation dataset with this annotation depth. Co-authored by Dong Wang (UIUC iSchool target faculty). ClimateMiSt's GPT-4 finding directly validates HyDMIS Stage 2 design. Climate and agricultural disinformation are thematically connected to HyDMIS's community targeting framing.
+146,670 tweets with veracity and stance annotations, largest climate disinformation dataset with this annotation depth. ClimateMiSt's GPT-4 finding directly validates HyDMIS Stage 2 design. Climate and agricultural disinformation are thematically connected to HyDMIS's community targeting framing.
 
 **Why stop at 9:**
 562K+ samples across 15+ languages and 6 domains is the most comprehensive multilingual disinformation evaluation corpus assembled for a single paper. Additional datasets add diminishing returns and increase Phase 4 compute requirements without strengthening the research claim.
@@ -167,9 +167,8 @@ PolyTruth (2025) established this as the right evaluation methodology for low-re
 **Why EMNLP 2027:**
 EMNLP 2026 ARR submission deadline was May 25, 2026, missed. NAACL 2027 ARR deadline is approximately October 2026, before HyDMIS paper writing begins. ACL 2027 ARR deadline is approximately February 2027, possible but tight. EMNLP 2027 ARR deadline approximately May 2027 gives sufficient time to write, revise, and polish a strong paper after December 2026 manuscript completion. EMNLP is the strongest venue for empirical multilingual NLP, submitting to ACL first and falling back to EMNLP is the alternative if ACL 2027 deadline is confirmed achievable.
 
-**arXiv preprint December 2026:** Posted after manuscript complete. Establishes priority and provides a citable preprint for PhD application materials even though no venue has accepted the paper at that point.
+**arXiv preprint December 2026:** Posted after the manuscript is complete. Establishes priority and gives a citable preprint before any venue has accepted the paper.
 
-**PhD application strategy:** HyDMIS listed as "manuscript in preparation" on Oct 20 iSchool application and manuscript attached to Dec 1 Informatics application. Neither deadline requires the paper to be under peer review.
 
 ---
 

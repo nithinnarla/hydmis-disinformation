@@ -36,7 +36,8 @@ PENDING_DATASETS = ('MultiClaim', 'ClimateMiSt')
 # Languages actually present across the six confirmed corpora: LIAR2,
 # TruthSeeker and FakeNewsNet are English, Covid-misinfo is EN/PT/ID,
 # NewsPolyML is EN/DE/ES/FR/IT, DeFaktS is German. Seven distinct languages.
-# Written out because a CV bullet claimed four for months, which undersold it.
+# Written out because a downstream description claimed four for months, which
+# understated the corpus.
 CONFIRMED_LANGUAGES = 7
 
 # Prose files. Data CSVs are excluded on purpose and must stay excluded:
@@ -105,9 +106,9 @@ def check_1_typography():
 
 
 def check_2_record_count():
-    """The confirmed total is 324,292. A CV bullet claimed 387K for months,
-    which matched no figure anywhere: not the confirmed total, not the
-    component sums, not the 562K full dataset."""
+    """The confirmed total is 324,292. A figure of 387K circulated for months
+    and matched nothing here: not the confirmed total, not the component sums,
+    not the 562K full dataset."""
     readme = read('README.md')
     if CONFIRMED_RECORDS not in readme:
         problems.append('record count: README.md no longer states the '
@@ -140,8 +141,8 @@ def check_3_pending_datasets_marked():
 
 
 def check_4_stage3_not_claimed_as_run():
-    """The defect this check exists for reached two application documents
-    before anyone noticed. Stage 3, the mBERT/XLM-R/RemBERT/Mistral
+    """The defect this check exists for reached downstream descriptions of this
+    work before anyone noticed. Stage 3, the mBERT/XLM-R/RemBERT/Mistral
     classification with community-weighted loss, is scoped and scripted and
     has NEVER RUN. No script in src/ contains a training loop for it. So the
     repository must not describe classification accuracy, F1 by language
@@ -180,8 +181,9 @@ def check_4_stage3_not_claimed_as_run():
 
 
 def check_5_language_count():
-    """A CV bullet claimed four languages when the six confirmed corpora carry
-    seven: English, German, Spanish, French, Italian, Portuguese, Indonesian.
+    """Four languages were claimed downstream when the six confirmed corpora
+    carry seven: English, German, Spanish, French, Italian, Portuguese,
+    Indonesian.
     The README's 15+ figure depends on MultiClaim's 39, which is not obtained."""
     readme = read('README.md')
     for m in re.finditer(r'(\d+)\+?\s+languages', readme):
